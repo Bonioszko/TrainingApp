@@ -1,6 +1,5 @@
-import "./App.css";
-import Navbar from "./components/Navbar/Navbar.jsx";
-function App() {
+import Navbar from "../../components/Navbar/Navbar";
+export default function Home() {
     return (
         <div className="main">
             <Navbar></Navbar>
@@ -8,5 +7,3 @@ function App() {
         </div>
     );
 }
-
-export default App;

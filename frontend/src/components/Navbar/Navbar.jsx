@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 
-import { UserContext } from "../../context/userContext";
+import { UserContext } from "../../../context/userContext";
 import { useContext } from "react";
+import "./navbar.css";
 export default function Navbar() {
     const { user, setUser } = useContext(UserContext);
     const handleLogout = async () => {

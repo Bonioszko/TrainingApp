@@ -71,7 +71,7 @@ const loginUser = async (req, res) => {
             // return res.status(200).json({ message: "passwords match" });
         }
     } catch (err) {
-        console.log(erro);
+        console.log(err);
     }
 };
 const getProfile = async (req, res) => {
