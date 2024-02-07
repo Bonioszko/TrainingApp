@@ -9,6 +9,7 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
 
 app.use(express.json()); // for parsing application/json
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use("/", require("./routes/authRouter"));
 const port = 8000;

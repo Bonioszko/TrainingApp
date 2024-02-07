@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
 const User = require("../models/user");
-
+const jwt = require("jsonwebtoken");
 const test = (req, res) => {
     res.json("test is wotrking ");
 };
@@ -59,7 +59,16 @@ const loginUser = async (req, res) => {
         if (!match) {
             return res.status(400).json({ error: "passwords do not match" });
         } else {
-            return res.status(200).json({ message: "passwords match" });
+            jwt.sign(
+                { email: user.email, id: user._id, name: user.name },
+                process.env.JWT_SECRET,
+                {},
+                (err, token) => {
+                    if (err) throw err;
+                    res.cookie("token", token).json(user);
+                }
+            );
+            // return res.status(200).json({ message: "passwords match" });
         }
     } catch (err) {
         console.log(erro);
