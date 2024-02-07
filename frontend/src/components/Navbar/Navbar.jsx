@@ -27,7 +27,7 @@ export default function Navbar() {
             <Link to="/register">register</Link>
             <Link to="/login">login</Link>
             <p>Welcome {user ? user.name : ""}</p>
-            <Link to="/">home</Link>
+            <Link to="/profile">Profile</Link>
             {user && <button onClick={handleLogout}>Logout</button>}
         </nav>
     );

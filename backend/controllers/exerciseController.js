@@ -21,7 +21,7 @@ const addExercise = asyncHandler(async (req, res, next) => {
         res.status(400).json({ erro: "provide valid body part" });
     }
 
-    const user = await User.findOne({ email: email }, { _id: 1 });
+    const user = await User.findOne({ email: email });
     if (!user) {
         res.status(400).json({ error: "user do not exists" });
     }
@@ -37,7 +37,25 @@ const addExercise = asyncHandler(async (req, res, next) => {
     const result = await exercise.save();
     return res.status(200).json({ message: "exercise succesfully added" });
 });
+const getAllUserExercises = asyncHandler(async (req, res, next) => {
+    const { email } = req.params;
+    const user = await User.findOne({ email: email });
+
+    if (!user) {
+        return res.status(400).json({ error: "User does not exist" });
+    }
+
+    const allExercises = await Exercise.find({
+        creator: { $in: [null, user._id] },
+    }).exec();
+
+    res.status(200).json({
+        title: "allExercises",
+        exercises_list: allExercises,
+    });
+});
 module.exports = {
     getAllExercises,
     addExercise,
+    getAllUserExercises,
 };

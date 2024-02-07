@@ -4,6 +4,7 @@ const router = express.Router();
 const {
     getAllExercises,
     addExercise,
+    getAllUserExercises,
 } = require("../controllers/exerciseController");
 
 const cors = require("cors");
@@ -17,4 +18,5 @@ router.use(
 
 router.get("/", getAllExercises);
 router.post("/", addExercise);
+router.get("/:email", getAllUserExercises);
 module.exports = router;

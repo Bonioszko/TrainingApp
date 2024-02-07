@@ -5,7 +5,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/Login/Login.jsx";
 import Register from "./pages/Register/Register.jsx";
-import Home from "./pages/Home/Home.jsx";
+import Profile from "./pages/Profile/Profile.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import { UserContextProvider } from "../context/userContext.jsx";
@@ -22,6 +22,10 @@ const router = createBrowserRouter([
     {
         path: "/register",
         element: <Register></Register>,
+    },
+    {
+        path: "/profile",
+        element: <Profile></Profile>,
     },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
