@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/userContext";
+import { useContext } from "react";
+import Navbar from "../components/Navbar.jsx";
 export default function Login() {
     const navigate = useNavigate();
+    const { user, setUser } = useContext(UserContext);
     const [data, setData] = useState({
         email: "",
         password: "",
     });
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const { email, password } = data;
@@ -16,6 +21,7 @@ export default function Login() {
                 headers: {
                     "Content-Type": "application/json",
                 },
+                credentials: "include",
                 body: JSON.stringify({ email, password }),
             });
             const responseData = await response.json();
@@ -25,6 +31,7 @@ export default function Login() {
             } else {
                 toast.success(responseData.message);
                 navigate("/");
+                setUser();
             }
         } catch (err) {
             console.log(err);
@@ -32,6 +39,7 @@ export default function Login() {
     };
     return (
         <div>
+            <Navbar></Navbar>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="">email</label>
                 <input

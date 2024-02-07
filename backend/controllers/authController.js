@@ -62,7 +62,7 @@ const loginUser = async (req, res) => {
             jwt.sign(
                 { email: user.email, id: user._id, name: user.name },
                 process.env.JWT_SECRET,
-                {},
+                { expiresIn: "1d" },
                 (err, token) => {
                     if (err) throw err;
                     res.cookie("token", token).json(user);
@@ -74,8 +74,26 @@ const loginUser = async (req, res) => {
         console.log(erro);
     }
 };
+const getProfile = async (req, res) => {
+    const { token } = req.cookies;
+
+    if (token) {
+        jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
+            if (err) throw err;
+            res.json(user);
+        });
+    } else {
+        res.json(null);
+    }
+};
+const logout = async (req, res) => {
+    res.clearCookie("token");
+    res.json({ logout: true });
+};
 module.exports = {
     test,
     registerUser,
     loginUser,
+    getProfile,
+    logout,
 };
