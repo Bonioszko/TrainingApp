@@ -55,8 +55,6 @@ const addTrainingTemplate = asyncHandler(async (req, res, next) => {
     }
 });
 const getAllUserTrainingsTemplates = asyncHandler(async (req, res, next) => {
-    console.log(req.body);
-    console.log(req.params);
     const { email } = req.params;
 
     const user = await User.findOne({ email: email });

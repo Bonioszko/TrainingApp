@@ -10,6 +10,24 @@ const getAllExercises = asyncHandler(async (req, res, next) => {
         exercises_list: allExercises,
     });
 });
+const deleteExercise = asyncHandler(async (req, res, next) => {
+    const { exerciseName, email } = req.body;
+    console.log(req.body);
+    const user = await User.findOne({ email: email });
+    if (!user) {
+        return res.status(400).json({ error: "user do not exists" });
+    }
+    console.log(user._id);
+
+    const exercise = await Exercise.findOneAndDelete({
+        name: exerciseName,
+        creator: user._id,
+    });
+    if (!exercise) {
+        return res.status(404).json({ error: "exercise not found" });
+    }
+    return res.status(200).json({ message: "exercise deleted successfully" });
+});
 const addExercise = asyncHandler(async (req, res, next) => {
     const { exerciseName, bodyPart, email } = req.body;
     if (!exerciseName || !bodyPart) {
@@ -25,7 +43,10 @@ const addExercise = asyncHandler(async (req, res, next) => {
     if (!user) {
         return res.status(400).json({ error: "user do not exists" });
     }
-    const existingExercise = await Exercise.findOne({ name: exerciseName });
+    const existingExercise = await Exercise.findOne({
+        name: exerciseName,
+        creator: user._id,
+    });
     if (existingExercise) {
         return res.status(400).json({ error: "Exercise already exists" });
     }
@@ -58,4 +79,5 @@ module.exports = {
     getAllExercises,
     addExercise,
     getAllUserExercises,
+    deleteExercise,
 };

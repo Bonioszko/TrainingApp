@@ -1,0 +1,37 @@
+a.my-button{
+    /* background: linear-gradient(to right,#f90000 ,#ff0000); */
+    background-color: #f90000;
+    color: #fff;
+    font-family: Trebuchet MS;
+    font-size: 18px;
+    font-weight: 800;
+    font-style: italic;
+    text-decoration: none;
+    background-image: url('../../assets/thrash.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: flex;
+    justify-content: center;
+    border: 0px solid #000;
+    border-radius: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+   }
+   a.my-button span{
+    margin-right: 26px;
+    display: block;
+    width: 1px;
+    height: 20px;
+
+
+    transform: rotate(0deg);
+   }
+   a.my-button:hover{
+    background: linear-gradient(to right,#fa5151 ,#ff5151);
+    background-color: #fa5151;
+   }
+   a.my-button:active{
+    transform: scale(0.95);
+   }
+   /*make it more round*/
