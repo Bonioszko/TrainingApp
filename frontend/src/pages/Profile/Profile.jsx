@@ -2,11 +2,14 @@ import Navbar from "../../components/Navbar/Navbar";
 import { UserContext } from "../../../context/userContext.jsx";
 import { useContext, useEffect, useState } from "react";
 import Dropdown from "../../components/Dropdown/Dropdown.jsx";
+import ButtonPlus from "../../components/ButtonPlus/ButtonPlus.jsx";
+import AddExercise from "../../components/AddExercise/AddExercise.jsx";
 export default function Profile() {
     const { user, setUser } = useContext(UserContext);
     const [userExercises, setUserExercises] = useState([]);
     const [userTrainingTemplate, setUserTrainingTemplate] = useState([]);
-    const [fetchAgain, setFetchAgain] = useState(false);
+    const [exercisePopup, setExercisePopup] = useState(false);
+
     useEffect(() => {
         const fetchExercises = async () => {
             const response = await fetch(
@@ -27,8 +30,8 @@ export default function Profile() {
         } else {
             setUserExercises([]);
         }
-    }, [user]);
-
+    }, [user, exercisePopup]);
+    //not optimal one render when poping up a window
     useEffect(() => {
         const fetchTrainingTemplates = async () => {
             const response = await fetch(
@@ -48,7 +51,7 @@ export default function Profile() {
         } else {
             setUserTrainingTemplate([]);
         }
-    }, [user]);
+    }, [user, exercisePopup]);
     // const handleSubmit = async (e) => {};
 
     return (
@@ -66,11 +69,21 @@ export default function Profile() {
                     ) : (
                         <p>No exercises found</p>
                     )}
+
                     <Dropdown
                         name="exercise"
                         listItems={userExercises}
                     ></Dropdown>
+                    <ButtonPlus
+                        onClick={() => setExercisePopup(true)}
+                    ></ButtonPlus>
+
+                    <AddExercise
+                        trigger={exercisePopup}
+                        setTrigger={setExercisePopup}
+                    ></AddExercise>
                 </div>
+
                 <div>
                     {userTrainingTemplate.length > 0 ? (
                         userTrainingTemplate.map((training, index) => (

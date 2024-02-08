@@ -18,12 +18,12 @@ const addExercise = asyncHandler(async (req, res, next) => {
             .json({ erro: "Please provide exercise name and body part" });
     }
     if (!bodyParts.includes(bodyPart)) {
-        res.status(400).json({ erro: "provide valid body part" });
+        return res.status(400).json({ error: "provide valid body part" });
     }
 
     const user = await User.findOne({ email: email });
     if (!user) {
-        res.status(400).json({ error: "user do not exists" });
+        return res.status(400).json({ error: "user do not exists" });
     }
     const existingExercise = await Exercise.findOne({ name: exerciseName });
     if (existingExercise) {
