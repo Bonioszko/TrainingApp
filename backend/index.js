@@ -13,5 +13,6 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use("/auth", require("./routes/authRouter"));
 app.use("/exercise", require("./routes/exerciseRouter"));
+app.use("/training", require("./routes/trainingRouter"));
 const port = 8000;
 app.listen(port, () => console.log(`Server is running on port ${port}`));
