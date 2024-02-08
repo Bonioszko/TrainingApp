@@ -1,7 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const cors = require("cors");
-const { addTrainingTemplate } = require("../controllers/trainingController");
+const {
+    addTrainingTemplate,
+    getAllUserTrainingsTemplates,
+    getAllTrainigns,
+} = require("../controllers/trainingController");
 router.use(
     cors({
         credentials: true,
@@ -10,4 +14,7 @@ router.use(
 );
 
 router.post("/", addTrainingTemplate);
+router.get("/", getAllTrainigns);
+router.get("/:email", getAllUserTrainingsTemplates);
+
 module.exports = router;

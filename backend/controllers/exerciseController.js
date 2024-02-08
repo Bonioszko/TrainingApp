@@ -3,7 +3,7 @@ const User = require("../models/user");
 const asyncHandler = require("express-async-handler");
 const bodyParts = require("../helpers/bodyParts");
 const getAllExercises = asyncHandler(async (req, res, next) => {
-    const allExercises = await Exercise.find().exec();
+    const allExercises = await Exercise.find();
 
     res.status(200).json({
         title: "allExercises",
@@ -47,7 +47,7 @@ const getAllUserExercises = asyncHandler(async (req, res, next) => {
 
     const allExercises = await Exercise.find({
         creator: { $in: [null, user._id] },
-    }).exec();
+    });
 
     res.status(200).json({
         title: "allExercises",

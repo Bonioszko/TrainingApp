@@ -7,7 +7,7 @@ export default function Navbar() {
     const { user, setUser } = useContext(UserContext);
     const handleLogout = async () => {
         // Make a request to your server's logout endpoint
-        const response = await fetch("http://localhost:8000/logout", {
+        const response = await fetch("http://localhost:8000/auth/logout", {
             method: "POST",
             credentials: "include",
         });
