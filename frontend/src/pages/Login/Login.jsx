@@ -16,14 +16,17 @@ export default function Login() {
         e.preventDefault();
         const { email, password } = data;
         try {
-            const response = await fetch("http://localhost:8000/auth/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                credentials: "include",
-                body: JSON.stringify({ email, password }),
-            });
+            const response = await fetch(
+                import.meta.env.VITE_REACT_APP_URL_API + "/auth/login",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    credentials: "include",
+                    body: JSON.stringify({ email, password }),
+                }
+            );
             const responseData = await response.json();
             console.log(responseData);
             if (responseData.error) {
@@ -43,6 +46,7 @@ export default function Login() {
             <div className="page">
                 <form onSubmit={handleSubmit}>
                     <h1>LOGIN</h1>
+                    {JSON.stringify(import.meta.env)}
                     <div className="form-field">
                         <label htmlFor="">email</label>
                         <input

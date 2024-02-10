@@ -16,7 +16,7 @@ export default function Register() {
 
         try {
             const response = await fetch(
-                "http://localhost:8000/auth/register",
+                import.meta.env.VITE_REACT_APP_URL_API + "/register",
                 {
                     method: "POST",
                     headers: {

@@ -16,7 +16,8 @@ export default function Profile() {
     useEffect(() => {
         const fetchExercises = async () => {
             const response = await fetch(
-                `http://localhost:8000/exercise/${user.email}`
+                import.meta.env.VITE_REACT_APP_URL_API +
+                    `/exercise/${user.email}`
             );
             const data = await response.json();
 
@@ -38,7 +39,7 @@ export default function Profile() {
     useEffect(() => {
         const fetchTrainingTemplates = async () => {
             const response = await fetch(
-                `http://localhost:8000/training/${user.email}`
+                import.meta.env.VITE_REACT_APP_URL_API + `/${user.email}`
             );
             const data = await response.json();
 
@@ -57,16 +58,19 @@ export default function Profile() {
     }, [user, exercisePopup, refresh]);
     // const handleSubmit = async (e) => {};
     const handleDelete = async (exerciseName) => {
-        const response = await fetch(`http://localhost:8000/exercise`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                exerciseName: exerciseName,
-                email: user.email,
-            }),
-        });
+        const response = await fetch(
+            import.meta.env.VITE_REACT_APP_URL_API + `/exercise`,
+            {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    exerciseName: exerciseName,
+                    email: user.email,
+                }),
+            }
+        );
 
         if (response.ok) {
             setRefresh((prevRefresh) => !prevRefresh);

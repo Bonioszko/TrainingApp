@@ -14,31 +14,32 @@ export default function AddExercise(props) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const { exerciseName, bodyPart } = data;
-        console.log(data);
+
         try {
-            const response = await fetch("http://localhost:8000/exercise", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    exerciseName,
-                    bodyPart,
-                    email: user.email,
-                }),
-            });
+            const response = await fetch(
+                import.meta.env.VITE_REACT_APP_URL_API + "/exercise",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        exerciseName,
+                        bodyPart,
+                        email: user.email,
+                    }),
+                }
+            );
 
             const data = await response.json();
 
             if (response.ok) {
-                console.log(data);
                 toast.success(data.message);
                 setdata({
                     exerciseName: "",
                     bodyPart: "",
                 });
             } else {
-                console.log(data.error);
                 toast.error(data.error);
             }
         } catch (error) {
@@ -71,6 +72,8 @@ export default function AddExercise(props) {
                             setdata({ ...data, bodyPart: e.target.value })
                         }
                     >
+                        {" "}
+                        <option value=""></option>
                         <option value="Arms">Arms</option>
                         <option value="Legs">Legs</option>
                         <option value="Chest">Chest</option>
