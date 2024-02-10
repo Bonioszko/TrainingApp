@@ -5,6 +5,8 @@ import Dropdown from "../../components/Dropdown/Dropdown.jsx";
 import ButtonPlus from "../../components/ButtonPlus/ButtonPlus.jsx";
 import AddExercise from "../../components/AddExercise/AddExercise.jsx";
 import DeleteButton from "../../components/DeleteButton/DeleteButton.jsx";
+import AddTrainingBasedOnTemplate from "../../components/AddTrainingBasedOnTemplate/AddTrainingBasedOnTemplate.jsx";
+import Popup from "../../components/Popup/Popup.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 export default function Profile() {
@@ -12,7 +14,10 @@ export default function Profile() {
     const [userExercises, setUserExercises] = useState([]);
     const [userTrainingTemplate, setUserTrainingTemplate] = useState([]);
     const [exercisePopup, setExercisePopup] = useState(false);
+    const [trainingPopup, setTrainingPopup] = useState(false);
+    const [currentTraining, setCurrentTraining] = useState({});
     const [refresh, setRefresh] = useState(false);
+
     useEffect(() => {
         const fetchExercises = async () => {
             const response = await fetch(
@@ -30,7 +35,6 @@ export default function Profile() {
 
         if (user) {
             fetchExercises();
-            console.log(userExercises);
         } else {
             setUserExercises([]);
         }
@@ -39,7 +43,8 @@ export default function Profile() {
     useEffect(() => {
         const fetchTrainingTemplates = async () => {
             const response = await fetch(
-                import.meta.env.VITE_REACT_APP_URL_API + `/${user.email}`
+                import.meta.env.VITE_REACT_APP_URL_API +
+                    `/training/${user.email}`
             );
             const data = await response.json();
 
@@ -51,7 +56,6 @@ export default function Profile() {
         };
         if (user) {
             fetchTrainingTemplates();
-            console.log(userTrainingTemplate);
         } else {
             setUserTrainingTemplate([]);
         }
@@ -116,7 +120,12 @@ export default function Profile() {
                         userTrainingTemplate.map((training, index) => (
                             <div key={index}>
                                 <h2>{training.name}</h2>
-                                {/* Add any other fields you want to display */}
+                                <ButtonPlus
+                                    onClick={() => {
+                                        setTrainingPopup(true);
+                                        setCurrentTraining(training);
+                                    }}
+                                ></ButtonPlus>
                             </div>
                         ))
                     ) : (
@@ -128,6 +137,13 @@ export default function Profile() {
                     ></Dropdown>
                 </div>
             </div>
+            {trainingPopup && (
+                <AddTrainingBasedOnTemplate
+                    trigger={trainingPopup}
+                    setTrigger={setTrainingPopup}
+                    trainingTemplate={currentTraining}
+                ></AddTrainingBasedOnTemplate>
+            )}
             <ToastContainer />
         </div>
     );

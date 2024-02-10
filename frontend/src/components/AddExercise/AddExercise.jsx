@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useContext } from "react";
 export default function AddExercise(props) {
     const { user, setUser } = useContext(UserContext);
-    const [data, setdata] = useState({
+    const [data, setData] = useState({
         exerciseName: "",
         bodyPart: "",
     });
@@ -35,7 +35,7 @@ export default function AddExercise(props) {
 
             if (response.ok) {
                 toast.success(data.message);
-                setdata({
+                setData({
                     exerciseName: "",
                     bodyPart: "",
                 });
@@ -58,7 +58,7 @@ export default function AddExercise(props) {
                         name="exerciseName"
                         value={data.exerciseName}
                         onChange={(e) =>
-                            setdata({ ...data, exerciseName: e.target.value })
+                            setData({ ...data, exerciseName: e.target.value })
                         }
                     />
                     <br />
@@ -69,7 +69,7 @@ export default function AddExercise(props) {
                         name="bodyPart"
                         value={data.bodyPart}
                         onChange={(e) =>
-                            setdata({ ...data, bodyPart: e.target.value })
+                            setData({ ...data, bodyPart: e.target.value })
                         }
                     >
                         {" "}

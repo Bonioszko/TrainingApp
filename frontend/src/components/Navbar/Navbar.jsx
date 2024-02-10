@@ -8,7 +8,7 @@ export default function Navbar() {
     const handleLogout = async () => {
         // Make a request to your server's logout endpoint
         const response = await fetch(
-            import.meta.env.VITE_REACT_APP_URL_API + "auth/logout",
+            import.meta.env.VITE_REACT_APP_URL_API + "/auth/logout",
             {
                 method: "POST",
                 credentials: "include",
@@ -29,6 +29,7 @@ export default function Navbar() {
         <nav>
             <Link to="/register">register</Link>
             <Link to="/login">login</Link>
+            <Link to="/trainings">trainings</Link>
             <p>Welcome {user ? user.name : ""}</p>
             <Link to="/profile">Profile</Link>
             {user && <button onClick={handleLogout}>Logout</button>}

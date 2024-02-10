@@ -33,7 +33,7 @@ const addExercise = asyncHandler(async (req, res, next) => {
     if (!exerciseName || !bodyPart) {
         return res
             .status(400)
-            .json({ erro: "Please provide exercise name and body part" });
+            .json({ error: "Please provide exercise name and body part" });
     }
     if (!bodyParts.includes(bodyPart)) {
         return res.status(400).json({ error: "provide valid body part" });

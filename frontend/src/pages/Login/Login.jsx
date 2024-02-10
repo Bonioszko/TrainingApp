@@ -46,7 +46,7 @@ export default function Login() {
             <div className="page">
                 <form onSubmit={handleSubmit}>
                     <h1>LOGIN</h1>
-                    {JSON.stringify(import.meta.env)}
+
                     <div className="form-field">
                         <label htmlFor="">email</label>
                         <input

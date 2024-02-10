@@ -3,7 +3,7 @@ const User = require("../models/user");
 const TrainingTemplate = require("../models/trainingTemplate");
 const asyncHandler = require("express-async-handler");
 
-const getAllTrainigns = asyncHandler(async (req, res, next) => {
+const getAllTrainings = asyncHandler(async (req, res, next) => {
     const allTrainings = await TrainingTemplate.find();
     console.log(req.params);
     res.status(200).json({
@@ -25,7 +25,7 @@ const addTrainingTemplate = asyncHandler(async (req, res, next) => {
         if (exercisesIds.length == 0) {
             return res
                 .status(400)
-                .json({ erro: "You must provide some valid exercises" });
+                .json({ error: "You must provide some valid exercises" });
         }
     }
 
@@ -71,8 +71,29 @@ const getAllUserTrainingsTemplates = asyncHandler(async (req, res, next) => {
         trainingTemplates_list: allTrainings,
     });
 });
+const deleteTrainingTemplate = asyncHandler(async (req, res, next) => {
+    const { name, email } = req.body;
+    console.log(req.body);
+    const user = await User.findOne({ email: email });
+    if (!user) {
+        return res.status(400).json({ error: "user do not exists" });
+    }
+    console.log(user._id);
+
+    const trainingTemplate = await TrainingTemplate.findOneAndDelete({
+        name: name,
+        creator: user._id,
+    });
+    if (!trainingTemplate) {
+        return res.status(404).json({ error: "Training template not found" });
+    }
+    return res
+        .status(200)
+        .json({ message: "Training template deleted successfully" });
+});
 module.exports = {
     addTrainingTemplate,
     getAllUserTrainingsTemplates,
-    getAllTrainigns,
+    getAllTrainings,
+    deleteTrainingTemplate,
 };

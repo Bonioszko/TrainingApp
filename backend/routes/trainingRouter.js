@@ -4,7 +4,8 @@ const cors = require("cors");
 const {
     addTrainingTemplate,
     getAllUserTrainingsTemplates,
-    getAllTrainigns,
+    getAllTrainings,
+    deleteTrainingTemplate,
 } = require("../controllers/trainingController");
 router.use(
     cors({
@@ -14,7 +15,9 @@ router.use(
 );
 
 router.post("/", addTrainingTemplate);
-router.get("/", getAllTrainigns);
+
+router.get("/", getAllTrainings);
 router.get("/:email", getAllUserTrainingsTemplates);
+router.delete("/", deleteTrainingTemplate);
 
 module.exports = router;

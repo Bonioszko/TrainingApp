@@ -7,6 +7,7 @@ import Login from "./pages/Login/Login.jsx";
 import Register from "./pages/Register/Register.jsx";
 import Profile from "./pages/Profile/Profile.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
+import Trainings from "./pages/Trainings/Trainings.jsx";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import { UserContextProvider } from "../context/userContext.jsx";
 const router = createBrowserRouter([
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
     {
         path: "/profile",
         element: <Profile></Profile>,
+    },
+    {
+        path: "/trainings",
+        element: <Trainings></Trainings>,
     },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
