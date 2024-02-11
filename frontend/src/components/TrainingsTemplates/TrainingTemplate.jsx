@@ -5,7 +5,7 @@ import ButtonPlus from "../ButtonPlus/ButtonPlus.jsx";
 import CurrentTraining from "../CurrentTraining/CurrentTraining.jsx";
 import Dropdown from "../Dropdown/Dropdown";
 
-export default function TrainingTemplate() {
+export default function TrainingTemplate({ refresh, setRefresh }) {
     const [userTrainingTemplate, setUserTrainingTemplate] = useState([]);
     const { user, setUser } = useContext(UserContext);
     const [trainingPopup, setTrainingPopup] = useState(false);
@@ -67,6 +67,8 @@ export default function TrainingTemplate() {
                     trainingInstance={trainingInstance}
                     setTrainingInstance={setTrainingInstance}
                     setTrainingInstancePopup={setTrainingInstancePopup}
+                    refresh={refresh}
+                    setRefresh={setRefresh}
                 ></AddTrainingBasedOnTemplate>
             )}
             {trainingInstancePopup && (

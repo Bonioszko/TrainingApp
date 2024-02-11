@@ -53,6 +53,7 @@ export default function AddTrainingBasedOnTemplate(props) {
                 setTimeout(() => {
                     props.setTrigger(false);
                     props.setTrainingInstancePopup(true);
+                    props.setRefresh(!props.refresh);
                 }, 1000);
             } else {
                 console.log(data.error);

@@ -34,7 +34,7 @@ const changeTrainingInstance = asyncHandler(async (req, res, next) => {
     }
 });
 const getTrainingsInstancesForUser = asyncHandler(async (req, res, next) => {
-    const { email } = req.body;
+    const { email } = req.params;
     const user = await User.findOne({ email: email });
     if (!user) {
         return res.status(400).json({ error: "User does not exist" });
