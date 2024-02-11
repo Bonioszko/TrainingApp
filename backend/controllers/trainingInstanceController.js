@@ -5,12 +5,52 @@ const TrainingInstance = require("../models/trainingInstance");
 const ExerciseInstance = require("../models/exerciseInstance");
 const asyncHandler = require("express-async-handler");
 const exercise = require("../models/exercise");
+const trainingInstance = require("../models/trainingInstance");
 
 const getTrainingInstance = asyncHandler(async (req, res, next) => {
     const { name, date } = req.body;
     console.log(date);
 });
+const changeTrainingInstance = asyncHandler(async (req, res, next) => {
+    const { name, date, exercises } = req.body;
 
+    const exercisesArray = (await TrainingInstance.findOne({ name, date }))
+        .exercises;
+
+    for (let i = 0; i < exercisesArray.length; i++) {
+        const exercise = exercisesArray[i];
+        console.log(exercises[i].sets);
+
+        const result = await ExerciseInstance.updateOne(
+            { _id: exercise },
+            { $set: { sets: exercises[i].sets } }
+        );
+    }
+
+    if (exercisesArray.length) {
+        res.status(200).json({ message: "Update successful" });
+    } else {
+        res.status(400).json({ message: "Update failed" });
+    }
+});
+const getTrainingsInstancesForUser = asyncHandler(async (req, res, next) => {
+    const { email } = req.body;
+    const user = await User.findOne({ email: email });
+    if (!user) {
+        return res.status(400).json({ error: "User does not exist" });
+    }
+    const allTrainingInstances = await TrainingInstance.find({
+        doneBy: user._id,
+    }).populate("exercises");
+    if (allTrainingInstances) {
+        res.status(200).json({
+            title: "allTrainingInstances",
+            trainings_list: allTrainingInstances,
+        });
+    } else {
+        return res.status(400).json({ message: "User does not have trainins" });
+    }
+});
 const createTrainingInstance = asyncHandler(async (req, res, next) => {
     const { name, doneBy, date, nameTemplate, creator } = req.body;
     const user = await User.findOne({ email: doneBy });
@@ -113,4 +153,6 @@ const createTrainingInstance = asyncHandler(async (req, res, next) => {
 module.exports = {
     createTrainingInstance,
     getTrainingInstance,
+    changeTrainingInstance,
+    getTrainingsInstancesForUser,
 };

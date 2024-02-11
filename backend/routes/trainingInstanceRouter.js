@@ -4,6 +4,8 @@ const cors = require("cors");
 const {
     createTrainingInstance,
     getTrainingInstance,
+    changeTrainingInstance,
+    getTrainingsInstancesForUser,
 } = require("../controllers/trainingInstanceController");
 router.use(
     cors({
@@ -12,5 +14,6 @@ router.use(
     })
 );
 router.post("/", createTrainingInstance);
-router.get("/", getTrainingInstance);
+router.get("/", getTrainingsInstancesForUser);
+router.put("/", changeTrainingInstance);
 module.exports = router;
