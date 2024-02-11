@@ -2,12 +2,21 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../context/userContext.jsx";
 import AddTrainingBasedOnTemplate from "../AddTrainingBasedOnTemplate/AddTrainingBasedOnTemplate.jsx";
 import ButtonPlus from "../ButtonPlus/ButtonPlus.jsx";
+import CurrentTraining from "../CurrentTraining/CurrentTraining.jsx";
 import Dropdown from "../Dropdown/Dropdown";
+
 export default function TrainingTemplate() {
     const [userTrainingTemplate, setUserTrainingTemplate] = useState([]);
     const { user, setUser } = useContext(UserContext);
     const [trainingPopup, setTrainingPopup] = useState(false);
     const [currentTraining, setCurrentTraining] = useState({});
+    const [trainingInstance, setTrainingInstance] = useState({
+        name: "",
+        doneBy: "",
+        exercises: [],
+        date: "",
+    });
+    const [trainingInstancePopup, setTrainingInstancePopup] = useState(false);
     useEffect(() => {
         const fetchTrainingTemplates = async () => {
             const response = await fetch(
@@ -49,12 +58,22 @@ export default function TrainingTemplate() {
                 name="training"
                 listItems={userTrainingTemplate}
             ></Dropdown>
+            {trainingInstance.name}
             {trainingPopup && (
                 <AddTrainingBasedOnTemplate
                     trigger={trainingPopup}
                     setTrigger={setTrainingPopup}
                     trainingTemplate={currentTraining}
+                    trainingInstance={trainingInstance}
+                    setTrainingInstance={setTrainingInstance}
+                    setTrainingInstancePopup={setTrainingInstancePopup}
                 ></AddTrainingBasedOnTemplate>
+            )}
+            {trainingInstancePopup && (
+                <CurrentTraining
+                    trainingInstance={trainingInstance}
+                    setTrainingInstancePopup={setTrainingInstancePopup}
+                ></CurrentTraining>
             )}
         </div>
     );

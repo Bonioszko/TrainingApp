@@ -43,15 +43,17 @@ export default function AddTrainingBasedOnTemplate(props) {
             const data = await response.json();
 
             if (response.ok) {
-                console.log(data.trainingInstance.name);
                 toast.success("TrainingInstanceCreated");
-                setTraining({
+                props.setTrainingInstance({
                     name: data.trainingInstance.name,
                     doneBy: data.trainingInstance.doneBy,
                     exercises: data.trainingInstance.exercises,
                     date: data.trainingInstance.date,
                 });
-                // props.setTrigger(false);
+                setTimeout(() => {
+                    props.setTrigger(false);
+                    props.setTrainingInstancePopup(true);
+                }, 1000);
             } else {
                 console.log(data.error);
                 toast.error(data.error);
