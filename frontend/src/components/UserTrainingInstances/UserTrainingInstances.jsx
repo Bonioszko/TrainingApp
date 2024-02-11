@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../context/userContext.jsx";
-
+import ExerciseInstanceInList from "../ExerciseInstanceInList/ExerciseInstanceInList.jsx";
 export default function UserTrainigInstances({ refresh, setRefresh }) {
     const { user, setUser } = useContext(UserContext);
     const [trainingInstances, setTrainingInstances] = useState([]);
@@ -30,7 +30,7 @@ export default function UserTrainigInstances({ refresh, setRefresh }) {
                         <h2>{training.name}</h2>
                         {training.exercises.map((exercise, indexInner) => (
                             <div key={indexInner}>
-                                <h3>{exercise.name}</h3>
+                                {/* <h3>{exercise.name}</h3>
                                 {exercise.sets.map((set, setIndex) => (
                                     <div key={setIndex}>
                                         <div>Kilograms: {set.kilograms}</div>
@@ -38,7 +38,11 @@ export default function UserTrainigInstances({ refresh, setRefresh }) {
                                             Repetitions: {set.repetitions}
                                         </div>
                                     </div>
-                                ))}
+
+                                ))} */}
+                                <ExerciseInstanceInList
+                                    exercise={exercise}
+                                ></ExerciseInstanceInList>
                             </div>
                         ))}
                     </div>

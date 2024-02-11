@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../context/userContext.jsx";
 import CloseButton from "../CloseButton/CloseButton.jsx";
-
+import SetsInList from "../SetsInList/SetsInList.jsx";
 // export default function CurrentTraining({
 //     trainingInstance,
 //     setTrainingInstancePopup,
@@ -94,8 +94,9 @@ export default function CurrentTraining({
                             <h1>previuos Sets</h1>
                             {exercise.sets.map((set, setIndex) => (
                                 <div key={setIndex}>
-                                    <div>Kilograms: {set.kilograms}</div>
-                                    <div>Repetitions: {set.repetitions}</div>
+                                    {/* <div>Kilograms: {set.kilograms}</div>
+                                    <div>Repetitions: {set.repetitions}</div> */}
+                                    <SetsInList set={set}></SetsInList>
                                 </div>
                             ))}
                             <input
