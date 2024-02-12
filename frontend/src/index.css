@@ -6,8 +6,10 @@
 }
 :root{
   --main-color: #283739;
-  --second-color: #a2c11c;
+  --second-color: #47af0b;
   --third-color:  #e0e0e0;
+  --fourth-color: #af0b47;
+   Font-family: Cambria, Georgia, serif;
 }
 /* Remove default margin */
 body,

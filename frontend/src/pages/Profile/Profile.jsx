@@ -93,9 +93,13 @@ export default function Profile() {
                         userExercises.map((exercise, index) => (
                             <div key={index}>
                                 <h2>{exercise.name}</h2>
-                                <DeleteButton
-                                    onClick={() => handleDelete(exercise.name)}
-                                ></DeleteButton>
+                                {exercise.creator ? (
+                                    <DeleteButton
+                                        onClick={() =>
+                                            handleDelete(exercise.name)
+                                        }
+                                    ></DeleteButton>
+                                ) : null}
                             </div>
                         ))
                     ) : (

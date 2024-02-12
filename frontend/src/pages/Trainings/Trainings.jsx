@@ -13,7 +13,10 @@ export default function Trainings() {
         <div className="main">
             <Navbar></Navbar>
             <div className="page">
-                <TrainingTemplate></TrainingTemplate>
+                <TrainingTemplate
+                    refresh={refresh}
+                    setRefresh={refresh}
+                ></TrainingTemplate>
                 <UserTrainigInstances
                     refresh={refresh}
                     setRefresh={refresh}
@@ -22,3 +25,4 @@ export default function Trainings() {
         </div>
     );
 }
+//make there a refresh context to refresg bot list on update (change refresh property)

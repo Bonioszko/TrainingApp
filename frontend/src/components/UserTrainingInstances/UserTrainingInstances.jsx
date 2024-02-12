@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../context/userContext.jsx";
 import ExerciseInstanceInList from "../ExerciseInstanceInList/ExerciseInstanceInList.jsx";
+import "./userTrainingInstances.css";
 export default function UserTrainigInstances({ refresh, setRefresh }) {
     const { user, setUser } = useContext(UserContext);
     const [trainingInstances, setTrainingInstances] = useState([]);
@@ -23,11 +24,17 @@ export default function UserTrainigInstances({ refresh, setRefresh }) {
     }, [user, refresh]);
 
     return (
-        <div>
+        <div className="trainingInstance">
             {trainingInstances.length > 0 ? (
                 trainingInstances.map((training, index) => (
                     <div key={index}>
-                        <h2>{training.name}</h2>
+                        <div className="training-header">
+                            <h2>{training.name}</h2>
+                            <a>
+                                {new Date(training.date).toLocaleDateString()}
+                            </a>
+                        </div>
+
                         {training.exercises.map((exercise, indexInner) => (
                             <div key={indexInner}>
                                 {/* <h3>{exercise.name}</h3>

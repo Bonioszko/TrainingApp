@@ -38,10 +38,16 @@ export default function TrainingTemplate({ refresh, setRefresh }) {
         }
     }, [user, trainingPopup]);
     return (
-        <div>
+        <div className="training-template">
             {userTrainingTemplate.length > 0 ? (
                 userTrainingTemplate.map((training, index) => (
-                    <div key={index}>
+                    <div
+                        key={index}
+                        onClick={() => {
+                            setTrainingPopup(true);
+                            setCurrentTraining(training);
+                        }}
+                    >
                         <h2>{training.name}</h2>
                         <ButtonPlus
                             onClick={() => {
