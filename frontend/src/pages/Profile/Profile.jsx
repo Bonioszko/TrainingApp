@@ -7,6 +7,7 @@ import AddExercise from "../../components/AddExercise/AddExercise.jsx";
 import DeleteButton from "../../components/DeleteButton/DeleteButton.jsx";
 import AddTrainingBasedOnTemplate from "../../components/AddTrainingBasedOnTemplate/AddTrainingBasedOnTemplate.jsx";
 import Popup from "../../components/Popup/Popup.jsx";
+import AddTrainingTemplate from "../../components/AddTrainingTemplate.jsx/AddTrainngTemplate.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 export default function Profile() {
@@ -139,14 +140,24 @@ export default function Profile() {
                         name="training"
                         listItems={userTrainingTemplate}
                     ></Dropdown>
+                    <ButtonPlus
+                        onClick={() => {
+                            setTrainingPopup(true);
+                        }}
+                    ></ButtonPlus>
                 </div>
             </div>
             {trainingPopup && (
-                <AddTrainingBasedOnTemplate
+                // <AddTrainingBasedOnTemplate
+                //     trigger={trainingPopup}
+                //     setTrigger={setTrainingPopup}
+                //     trainingTemplate={currentTraining}
+                // ></AddTrainingBasedOnTemplate>
+                <AddTrainingTemplate
                     trigger={trainingPopup}
                     setTrigger={setTrainingPopup}
-                    trainingTemplate={currentTraining}
-                ></AddTrainingBasedOnTemplate>
+                    userExercises={userExercises}
+                ></AddTrainingTemplate>
             )}
             <ToastContainer />
         </div>
