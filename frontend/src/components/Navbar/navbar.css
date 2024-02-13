@@ -4,6 +4,37 @@ nav{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    gap: 20px;
     height: 100%;
     align-items: center;
 }
+
+.link,.logout{
+    background: var(--fourth-color);
+    text-decoration: none;
+
+    text-align: center;
+    line-height: 3;
+    outline-color: transparent;
+    border-radius: 20px ;
+    border: 2px solid white;
+}
+.link{
+    flex: 1;
+}
+.link:link,
+.link:visited,
+.link:focus {
+  background: var(--fourth-color);
+  color: black;
+}
+.link:hover,
+.logout:hover{
+    background-color: var(--main-color);
+    color:white;
+
+}
+/* .logout{
+    flex:1;
+    line-height: 3;
+} */

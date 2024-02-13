@@ -27,12 +27,25 @@ export default function Navbar() {
     };
     return (
         <nav>
-            <Link to="/register">register</Link>
-            <Link to="/login">login</Link>
-            <Link to="/trainings">trainings</Link>
+            <Link to="/register" className="link">
+                register
+            </Link>
+            <Link to="/login" className="link">
+                login
+            </Link>
             <p>Welcome {user ? user.name : ""}</p>
-            <Link to="/profile">Profile</Link>
-            {user && <button onClick={handleLogout}>Logout</button>}
+            <Link to="/trainings" className="link">
+                trainings
+            </Link>
+
+            <Link to="/profile" className="link">
+                Profile
+            </Link>
+            {user && (
+                <button onClick={handleLogout} className="logout">
+                    Logout
+                </button>
+            )}
         </nav>
     );
 }

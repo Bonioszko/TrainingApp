@@ -81,6 +81,8 @@ export default function TrainingTemplate({ refresh, setRefresh }) {
                 <CurrentTraining
                     trainingInstance={trainingInstance}
                     setTrainingInstancePopup={setTrainingInstancePopup}
+                    refresh={refresh}
+                    setRefresh={setRefresh}
                 ></CurrentTraining>
             )}
         </div>

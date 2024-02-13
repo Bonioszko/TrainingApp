@@ -15,11 +15,11 @@ export default function Trainings() {
             <div className="page">
                 <TrainingTemplate
                     refresh={refresh}
-                    setRefresh={refresh}
+                    setRefresh={setRefresh}
                 ></TrainingTemplate>
                 <UserTrainigInstances
                     refresh={refresh}
-                    setRefresh={refresh}
+                    setRefresh={setRefresh}
                 ></UserTrainigInstances>
             </div>
         </div>

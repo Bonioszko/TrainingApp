@@ -27,6 +27,8 @@ import SetsInList from "../SetsInList/SetsInList.jsx";
 export default function CurrentTraining({
     trainingInstance,
     setTrainingInstancePopup,
+    refresh,
+    setRefresh,
 }) {
     const [trainingChanged, setTrainingChanged] = useState(trainingInstance);
     const [sets, setSets] = useState(
@@ -54,7 +56,7 @@ export default function CurrentTraining({
             );
             const data = await response.json();
             if (response.ok) {
-                console.log(data);
+                setRefresh(!refresh);
             }
         } catch (error) {
             console.error("Error", error);

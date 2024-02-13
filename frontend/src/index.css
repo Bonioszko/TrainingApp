@@ -5,10 +5,10 @@
   box-sizing: border-box;
 }
 :root{
-  --main-color: #283739;
-  --second-color: #47af0b;
+  --main-color: #191A19;
+  --second-color: #4E9F3D;
   --third-color:  #e0e0e0;
-  --fourth-color: #af0b47;
+  --fourth-color: #1E5128;
    Font-family: Cambria, Georgia, serif;
 }
 /* Remove default margin */
