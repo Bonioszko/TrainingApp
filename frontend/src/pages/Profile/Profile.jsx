@@ -88,7 +88,6 @@ export default function Profile() {
         <div className="main">
             <Navbar></Navbar>
             <div className="page">
-                <button>sadasdsd</button>
                 <div>
                     {userExercises.length > 0 ? (
                         userExercises.map((exercise, index) => (
@@ -107,10 +106,10 @@ export default function Profile() {
                         <p>No exercises found</p>
                     )}
 
-                    <Dropdown
+                    {/* <Dropdown
                         name="exercise"
                         listItems={userExercises}
-                    ></Dropdown>
+                    ></Dropdown> */}
                     <ButtonPlus
                         onClick={() => setExercisePopup(true)}
                     ></ButtonPlus>
@@ -136,10 +135,10 @@ export default function Profile() {
                     ) : (
                         <p>No training templates found</p>
                     )}
-                    <Dropdown
+                    {/* <Dropdown
                         name="training"
                         listItems={userTrainingTemplate}
-                    ></Dropdown>
+                    ></Dropdown> */}
                     <ButtonPlus
                         onClick={() => {
                             setTrainingPopup(true);

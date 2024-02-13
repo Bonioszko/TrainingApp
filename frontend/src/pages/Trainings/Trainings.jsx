@@ -12,16 +12,22 @@ export default function Trainings() {
     return (
         <div className="main">
             <Navbar></Navbar>
-            <div className="page">
-                <TrainingTemplate
-                    refresh={refresh}
-                    setRefresh={setRefresh}
-                ></TrainingTemplate>
-                <UserTrainigInstances
-                    refresh={refresh}
-                    setRefresh={setRefresh}
-                ></UserTrainigInstances>
-            </div>
+            {user ? (
+                <div className="page">
+                    <TrainingTemplate
+                        refresh={refresh}
+                        setRefresh={setRefresh}
+                    ></TrainingTemplate>
+                    <UserTrainigInstances
+                        refresh={refresh}
+                        setRefresh={setRefresh}
+                    ></UserTrainigInstances>
+                </div>
+            ) : (
+                <div className="page">
+                    <h1>You must be logged in to access trainings</h1>{" "}
+                </div>
+            )}
         </div>
     );
 }

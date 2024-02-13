@@ -13,7 +13,7 @@ const getAllTrainings = asyncHandler(async (req, res, next) => {
 });
 const addTrainingTemplate = asyncHandler(async (req, res, next) => {
     const { name, email, exercises } = req.body;
-    console.log(name);
+    console.log(email);
     let exercisesIds = [];
     const user = await User.findOne({ email: email });
     console.log(user);
@@ -68,15 +68,21 @@ const getAllUserTrainingsTemplates = asyncHandler(async (req, res, next) => {
     if (!user) {
         return res.status(400).json({ error: "User does not exist" });
     }
-
-    const userTrainings = await TrainingTemplate.find({ creator: user._id });
+    let userTrainings = [];
+    if (user._id != "65ca7d708bbdfbcd9c4c8ee0") {
+        userTrainings = await TrainingTemplate.find({
+            creator: user._id,
+        });
+    }
+    // const userTrainings = await TrainingTemplate.find({
+    //     creator: user._id,
+    // });
     const otherTrainings = await TrainingTemplate.find({
         creator: "65ca7d708bbdfbcd9c4c8ee0",
     });
-
     const allTrainings = [...userTrainings, ...otherTrainings];
 
-    res.status(200).json({
+    return res.status(200).json({
         title: "allTrainingTemplates",
         trainingTemplates_list: allTrainings,
     });
@@ -107,3 +113,4 @@ module.exports = {
     getAllTrainings,
     deleteTrainingTemplate,
 };
+//make it into env variable or somethign

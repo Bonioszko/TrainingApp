@@ -60,11 +60,11 @@ export default function TrainingTemplate({ refresh, setRefresh }) {
             ) : (
                 <p>No training templates found</p>
             )}
-            <Dropdown
+            {/* <Dropdown
                 name="training"
                 listItems={userTrainingTemplate}
-            ></Dropdown>
-            {trainingInstance.name}
+            ></Dropdown> */}
+
             {trainingPopup && (
                 <AddTrainingBasedOnTemplate
                     trigger={trainingPopup}

@@ -19,8 +19,12 @@ nav{
     border-radius: 20px ;
     border: 2px solid white;
 }
+
 .link{
     flex: 1;
+}
+.link.login, .link.register{
+    flex:0.4
 }
 .link:link,
 .link:visited,

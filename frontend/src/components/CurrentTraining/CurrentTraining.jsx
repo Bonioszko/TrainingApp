@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../context/userContext.jsx";
 import CloseButton from "../CloseButton/CloseButton.jsx";
 import SetsInList from "../SetsInList/SetsInList.jsx";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 // export default function CurrentTraining({
 //     trainingInstance,
 //     setTrainingInstancePopup,
@@ -57,9 +59,13 @@ export default function CurrentTraining({
             const data = await response.json();
             if (response.ok) {
                 setRefresh(!refresh);
+                toast.success("training added");
+                setTrainingInstancePopup(false);
+                setTrainingChanged(null);
             }
         } catch (error) {
             console.error("Error", error);
+            toast.error("training not added");
         }
     };
     const addSet = (exerciseIndex) => {
@@ -144,6 +150,9 @@ export default function CurrentTraining({
                 </div>
                 <button onClick={handleSubmit}>submit</button>
             </div>
+            <ToastContainer />
         </div>
     );
 }
+
+//add support for if user refresh page what to do
