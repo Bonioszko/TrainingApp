@@ -16,6 +16,7 @@ const addTrainingTemplate = asyncHandler(async (req, res, next) => {
     console.log(name);
     let exercisesIds = [];
     const user = await User.findOne({ email: email });
+    console.log(user);
     if (exercises) {
         for (let i = 0; i < exercises.length; i++) {
             const id = await Exercise.findOne({
@@ -68,9 +69,13 @@ const getAllUserTrainingsTemplates = asyncHandler(async (req, res, next) => {
         return res.status(400).json({ error: "User does not exist" });
     }
 
-    const allTrainings = await TrainingTemplate.find({
-        creator: { $in: [null, user._id] },
+    const userTrainings = await TrainingTemplate.find({ creator: user._id });
+    const otherTrainings = await TrainingTemplate.find({
+        creator: "65ca7d708bbdfbcd9c4c8ee0",
     });
+
+    const allTrainings = [...userTrainings, ...otherTrainings];
+
     res.status(200).json({
         title: "allTrainingTemplates",
         trainingTemplates_list: allTrainings,

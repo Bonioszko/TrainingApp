@@ -60,7 +60,7 @@ export default function Profile() {
         } else {
             setUserTrainingTemplate([]);
         }
-    }, [user, exercisePopup, refresh]);
+    }, [user, trainingPopup, refresh]);
     // const handleSubmit = async (e) => {};
     const handleDelete = async (exerciseName) => {
         const response = await fetch(
@@ -125,12 +125,12 @@ export default function Profile() {
                         userTrainingTemplate.map((training, index) => (
                             <div key={index}>
                                 <h2>{training.name}</h2>
-                                <ButtonPlus
+                                {/* <ButtonPlus
                                     onClick={() => {
                                         setTrainingPopup(true);
                                         setCurrentTraining(training);
                                     }}
-                                ></ButtonPlus>
+                                ></ButtonPlus> */}
                             </div>
                         ))
                     ) : (
@@ -163,3 +163,4 @@ export default function Profile() {
         </div>
     );
 }
+//if user is not logeed in do nto display it

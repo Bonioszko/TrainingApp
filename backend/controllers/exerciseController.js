@@ -66,9 +66,12 @@ const getAllUserExercises = asyncHandler(async (req, res, next) => {
         return res.status(400).json({ error: "User does not exist" });
     }
 
-    const allExercises = await Exercise.find({
-        creator: { $in: [null, user._id] },
+    const userExercises = await Exercise.find({ creator: user._id });
+    const otherExercises = await Exercise.find({
+        creator: "65ca7d708bbdfbcd9c4c8ee0",
     });
+
+    const allExercises = [...userExercises, ...otherExercises];
 
     res.status(200).json({
         title: "allExercises",
