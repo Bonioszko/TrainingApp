@@ -1,32 +1,41 @@
-import React from "react";
-import "./addExercise.css";
 import { useState } from "react";
 import { UserContext } from "../../../context/userContext.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { useContext } from "react";
-export default function AddExercise(props) {
+
+export default function AddTrainingBasedOnTemplate(props) {
     const { user, setUser } = useContext(UserContext);
+
     const [data, setData] = useState({
-        exerciseName: "",
-        bodyPart: "",
+        name: "",
+        date: "",
     });
+    const [training, setTraining] = useState({
+        name: "",
+        doneBy: "",
+        exercises: [],
+        date: "",
+    });
+    const trainingTemplate = props.trainingTemplate;
+
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const { exerciseName, bodyPart } = data;
-
+        const { name, date } = data;
         try {
             const response = await fetch(
-                import.meta.env.VITE_REACT_APP_URL_API + "/exercise",
+                import.meta.env.VITE_REACT_APP_URL_API + "/trainingInstance",
                 {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        exerciseName,
-                        bodyPart,
-                        email: user.email,
+                        name,
+                        date,
+                        doneBy: user.email,
+                        creator: trainingTemplate.creator,
+                        nameTemplate: trainingTemplate.name,
                     }),
                 }
             );
@@ -34,50 +43,54 @@ export default function AddExercise(props) {
             const data = await response.json();
 
             if (response.ok) {
-                toast.success(data.message);
-                setData({
-                    exerciseName: "",
-                    bodyPart: "",
+                toast.success("TrainingInstanceCreated");
+                props.setTrainingInstance({
+                    name: data.trainingInstance.name,
+                    doneBy: data.trainingInstance.doneBy,
+                    exercises: data.trainingInstance.exercises,
+                    date: data.trainingInstance.date,
                 });
+                setTimeout(() => {
+                    props.setTrigger(false);
+                    props.setTrainingInstancePopup(true);
+                    props.setRefresh(!props.refresh);
+                }, 1000);
             } else {
+                console.log(data.error);
                 toast.error(data.error);
             }
         } catch (error) {
             console.error("Error", error);
         }
     };
+
     return props.trigger ? (
         <div className="popup">
             <div className="popup-inner">
                 <form onSubmit={handleSubmit}>
-                    <label htmlFor="exerciseName">Exercise Name:</label>
+                    <label htmlFor="name">Name:</label>
                     <br />
                     <input
                         type="text"
-                        id="exerciseName"
-                        name="exerciseName"
-                        value={data.exerciseName}
+                        id="name"
+                        name="name"
+                        value={data.name}
                         onChange={(e) =>
-                            setData({ ...data, exerciseName: e.target.value })
+                            setData({ ...data, name: e.target.value })
                         }
                     />
                     <br />
-                    <label htmlFor="bodyPart">Body Part:</label>
+                    <label htmlFor="name">Name:</label>
                     <br />
-                    <select
-                        id="bodyPart"
-                        name="bodyPart"
-                        value={data.bodyPart}
+                    <input
+                        type="date"
+                        id="date"
+                        name="date"
+                        value={data.date}
                         onChange={(e) =>
-                            setData({ ...data, bodyPart: e.target.value })
+                            setData({ ...data, date: e.target.value })
                         }
-                    >
-                        {" "}
-                        <option value=""></option>
-                        <option value="Arms">Arms</option>
-                        <option value="Legs">Legs</option>
-                        <option value="Chest">Chest</option>
-                    </select>
+                    />
                     <br />
 
                     <button type="submit"> submit</button>

@@ -10,4 +10,5 @@ const ExerciseSchema = new Schema({
     },
     creator: { type: Schema.Types.ObjectId, ref: "User", default: null },
 });
+ExerciseSchema.index({ name: 1, creator: 1 }, { unique: true });
 module.exports = mongoose.model("Exercise", ExerciseSchema);

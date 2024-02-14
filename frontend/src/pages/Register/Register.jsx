@@ -16,7 +16,7 @@ export default function Register() {
 
         try {
             const response = await fetch(
-                "http://localhost:8000/auth/register",
+                import.meta.env.VITE_REACT_APP_URL_API + "/auth/register",
                 {
                     method: "POST",
                     headers: {
@@ -45,7 +45,7 @@ export default function Register() {
             <Navbar></Navbar>
             <div className="page">
                 <form onSubmit={handleSubmit}>
-                    <h1>Register</h1>
+                    <h2>Register</h2>
                     <div className="form-field">
                         <label htmlFor="">Name</label>
                         <input

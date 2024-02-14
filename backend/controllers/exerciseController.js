@@ -10,12 +10,30 @@ const getAllExercises = asyncHandler(async (req, res, next) => {
         exercises_list: allExercises,
     });
 });
+const deleteExercise = asyncHandler(async (req, res, next) => {
+    const { exerciseName, email } = req.body;
+    console.log(req.body);
+    const user = await User.findOne({ email: email });
+    if (!user) {
+        return res.status(400).json({ error: "user do not exists" });
+    }
+    console.log(user._id);
+
+    const exercise = await Exercise.findOneAndDelete({
+        name: exerciseName,
+        creator: user._id,
+    });
+    if (!exercise) {
+        return res.status(404).json({ error: "exercise not found" });
+    }
+    return res.status(200).json({ message: "exercise deleted successfully" });
+});
 const addExercise = asyncHandler(async (req, res, next) => {
     const { exerciseName, bodyPart, email } = req.body;
     if (!exerciseName || !bodyPart) {
         return res
             .status(400)
-            .json({ erro: "Please provide exercise name and body part" });
+            .json({ error: "Please provide exercise name and body part" });
     }
     if (!bodyParts.includes(bodyPart)) {
         return res.status(400).json({ error: "provide valid body part" });
@@ -25,7 +43,10 @@ const addExercise = asyncHandler(async (req, res, next) => {
     if (!user) {
         return res.status(400).json({ error: "user do not exists" });
     }
-    const existingExercise = await Exercise.findOne({ name: exerciseName });
+    const existingExercise = await Exercise.findOne({
+        name: exerciseName,
+        creator: user._id,
+    });
     if (existingExercise) {
         return res.status(400).json({ error: "Exercise already exists" });
     }
@@ -44,10 +65,16 @@ const getAllUserExercises = asyncHandler(async (req, res, next) => {
     if (!user) {
         return res.status(400).json({ error: "User does not exist" });
     }
+    let userExercises = [];
+    if (user._id != "65ca7d708bbdfbcd9c4c8ee0") {
+        userExercises = await Exercise.find({ creator: user._id });
+    }
 
-    const allExercises = await Exercise.find({
-        creator: { $in: [null, user._id] },
+    const otherExercises = await Exercise.find({
+        creator: "65ca7d708bbdfbcd9c4c8ee0",
     });
+
+    const allExercises = [...userExercises, ...otherExercises];
 
     res.status(200).json({
         title: "allExercises",
@@ -58,4 +85,5 @@ module.exports = {
     getAllExercises,
     addExercise,
     getAllUserExercises,
+    deleteExercise,
 };
