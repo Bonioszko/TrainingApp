@@ -92,7 +92,7 @@ export default function Profile() {
                     {userExercises.length > 0 ? (
                         userExercises.map((exercise, index) => (
                             <div key={index}>
-                                <h2>{exercise.name}</h2>
+                                <h1>{exercise.name}</h1>
                                 {exercise.creator ? (
                                     <DeleteButton
                                         onClick={() =>
@@ -106,10 +106,6 @@ export default function Profile() {
                         <p>No exercises found</p>
                     )}
 
-                    {/* <Dropdown
-                        name="exercise"
-                        listItems={userExercises}
-                    ></Dropdown> */}
                     <ButtonPlus
                         onClick={() => setExercisePopup(true)}
                     ></ButtonPlus>
@@ -123,22 +119,13 @@ export default function Profile() {
                     {userTrainingTemplate.length > 0 ? (
                         userTrainingTemplate.map((training, index) => (
                             <div key={index}>
-                                <h2>{training.name}</h2>
-                                {/* <ButtonPlus
-                                    onClick={() => {
-                                        setTrainingPopup(true);
-                                        setCurrentTraining(training);
-                                    }}
-                                ></ButtonPlus> */}
+                                <h1>{training.name}</h1>
                             </div>
                         ))
                     ) : (
                         <p>No training templates found</p>
                     )}
-                    {/* <Dropdown
-                        name="training"
-                        listItems={userTrainingTemplate}
-                    ></Dropdown> */}
+
                     <ButtonPlus
                         onClick={() => {
                             setTrainingPopup(true);
@@ -147,11 +134,6 @@ export default function Profile() {
                 </div>
             </div>
             {trainingPopup && (
-                // <AddTrainingBasedOnTemplate
-                //     trigger={trainingPopup}
-                //     setTrigger={setTrainingPopup}
-                //     trainingTemplate={currentTraining}
-                // ></AddTrainingBasedOnTemplate>
                 <AddTrainingTemplate
                     trigger={trainingPopup}
                     setTrigger={setTrainingPopup}

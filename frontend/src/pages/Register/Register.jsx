@@ -45,7 +45,7 @@ export default function Register() {
             <Navbar></Navbar>
             <div className="page">
                 <form onSubmit={handleSubmit}>
-                    <h1>Register</h1>
+                    <h2>Register</h2>
                     <div className="form-field">
                         <label htmlFor="">Name</label>
                         <input

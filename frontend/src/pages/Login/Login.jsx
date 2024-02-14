@@ -33,9 +33,11 @@ export default function Login() {
             if (responseData.error) {
                 toast.error(responseData.error);
             } else {
-                toast.success(responseData.message);
-                navigate("/");
-                setUser();
+                toast.success("You are logged as: " + responseData.name);
+                setTimeout(() => {
+                    navigate("/profile");
+                    setUser();
+                }, 1000);
             }
         } catch (err) {
             console.log(err);
@@ -48,7 +50,7 @@ export default function Login() {
             <div className="page">
                 {!user ? (
                     <form onSubmit={handleSubmit}>
-                        <h1>LOGIN</h1>
+                        <h2>LOGIN</h2>
 
                         <div className="form-field">
                             <label htmlFor="">email</label>

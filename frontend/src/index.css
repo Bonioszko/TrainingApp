@@ -9,7 +9,9 @@
   --second-color: #4E9F3D;
   --third-color:  #e0e0e0;
   --fourth-color: #1E5128;
-   Font-family: Cambria, Georgia, serif;
+   Font-family: Consolas, monaco, monospace;
+   font-weight: bold;
+
 }
 /* Remove default margin */
 body,
@@ -107,14 +109,18 @@ form{
   border-radius: 5px;
   padding: 20px;
 }
-button, input,label{
+button, input{
   border-radius: 20px;
-  background-color: var(--second-color);
+
 }
-h1{
+h2{
   text-align: center;
+  color: #191A19;
 }
 .form-field{
   display: flex;
   flex-direction: column;
+}
+label{
+  color:#191A19
 }

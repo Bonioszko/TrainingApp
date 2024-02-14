@@ -1,5 +1,7 @@
 import { UserContext } from "../../../context/userContext.jsx";
 import { useContext } from "react";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 export default function LogoutButton() {
     const { user, setUser } = useContext(UserContext);
     const handleLogout = async () => {
@@ -14,6 +16,8 @@ export default function LogoutButton() {
 
         if (response.ok) {
             // If the logout was successful, clear the user context
+            toast.success("You are logged out");
+            console.log("succe");
             setUser(null);
             document.cookie =
                 "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -23,8 +27,12 @@ export default function LogoutButton() {
         }
     };
     return (
-        <button onClick={handleLogout} className="logout">
-            Logout
-        </button>
+        <>
+            <button onClick={handleLogout} className="logout">
+                Logout
+            </button>
+            <ToastContainer />
+        </>
     );
 }
+//toast is not working
