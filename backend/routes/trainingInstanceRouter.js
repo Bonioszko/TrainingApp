@@ -15,6 +15,6 @@ router.use(
 );
 router.post("/", createTrainingInstance);
 router.get("/", getTrainingInstance);
-router.get("/:email", getTrainingsInstancesForUser);
+router.get("/:email/:date", getTrainingsInstancesForUser);
 router.put("/", changeTrainingInstance);
 module.exports = router;

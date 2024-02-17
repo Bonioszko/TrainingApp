@@ -1,0 +1,21 @@
+.date-training{
+    width: 200px;
+    height: 50px;
+}
+.page-trainings{
+    min-height: 100vh;
+    display: flex;
+   padding: 150px;
+    justify-content: space-around;
+    align-items:flex-start;
+    gap:   20px;
+}
+.right{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid white;
+    border-radius: 20px;
+    padding: 20px;
+}

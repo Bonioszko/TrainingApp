@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import Dropdown from "../Dropdown/Dropdown.jsx";
 import ButtonPlus from "../ButtonPlus/ButtonPlus.jsx";
 import DeleteButton from "../DeleteButton/DeleteButton.jsx";
+import "./addTrainingTemplate.css";
 export default function AddTrainingTemplate(props) {
     const { user, setUser } = useContext(UserContext);
     const [trainingTemplate, setTrainingTemplate] = useState({
@@ -18,9 +19,9 @@ export default function AddTrainingTemplate(props) {
         setSelectedExercise(newExercise);
     };
     const handleSubmit = async (e) => {
-        setTrainingTemplate({ ...trainingTemplate, creator: user.email });
         e.preventDefault();
-        const { creator, name, exercises } = trainingTemplate;
+        setTrainingTemplate({ ...trainingTemplate });
+        const { name, exercises } = trainingTemplate;
 
         try {
             const response = await fetch(
@@ -30,7 +31,11 @@ export default function AddTrainingTemplate(props) {
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({ name, email: creator, exercises }),
+                    body: JSON.stringify({
+                        name,
+                        email: user.email,
+                        exercises,
+                    }),
                 }
             );
             const responseData = await response.json();
@@ -74,9 +79,12 @@ export default function AddTrainingTemplate(props) {
     return props.trigger ? (
         <div className="popup">
             <div className="popup-inner">
+                <h1>Add training template</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="form-field">
-                        <label htmlFor="">Name</label>
+                        <label htmlFor="" className="name">
+                            Name
+                        </label>
                         <input
                             type="text"
                             placeholder="enter name"
@@ -90,25 +98,35 @@ export default function AddTrainingTemplate(props) {
                         />
                     </div>
                     <div className="form-field">
-                        <Dropdown
-                            name="exercise"
-                            listItems={props.userExercises}
-                            onValueChange={handleExerciseChange}
-                        ></Dropdown>
-                        <ButtonPlus
-                            type="button"
-                            onClick={handleExerciseAdd}
-                        ></ButtonPlus>
-                        {trainingTemplate.exercises.map((exercise, index) => (
-                            <div key={index}>
-                                {exercise}
-                                <DeleteButton
-                                    onClick={() =>
-                                        handleExerciseDelete(exercise)
-                                    }
-                                ></DeleteButton>
-                            </div>
-                        ))}
+                        <label className="exercise-dropdown">
+                            Add exercise
+                        </label>
+                        <div className="exercise-add">
+                            <Dropdown
+                                name="exercise"
+                                listItems={props.userExercises}
+                                onValueChange={handleExerciseChange}
+                            ></Dropdown>
+                            <ButtonPlus
+                                type="button"
+                                onClick={handleExerciseAdd}
+                            ></ButtonPlus>
+                        </div>
+                        <div className="list-exercises">
+                            {" "}
+                            {trainingTemplate.exercises.map(
+                                (exercise, index) => (
+                                    <div key={index} className="exercise-field">
+                                        <label htmlFor="">{exercise}</label>
+                                        <DeleteButton
+                                            onClick={() =>
+                                                handleExerciseDelete(exercise)
+                                            }
+                                        ></DeleteButton>
+                                    </div>
+                                )
+                            )}
+                        </div>
                     </div>
                     <button type="submit"> submit</button>
                 </form>

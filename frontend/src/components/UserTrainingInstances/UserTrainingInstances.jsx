@@ -2,34 +2,42 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../context/userContext.jsx";
 import ExerciseInstanceInList from "../ExerciseInstanceInList/ExerciseInstanceInList.jsx";
 import "./userTrainingInstances.css";
-export default function UserTrainigInstances({ refresh, setRefresh }) {
+export default function UserTrainigInstances({
+    refresh,
+    setRefresh,
+    selectedDate,
+}) {
     const { user, setUser } = useContext(UserContext);
     const [trainingInstances, setTrainingInstances] = useState([]);
     useEffect(() => {
         const fetchUserTrainingInstances = async () => {
+            selectedDate.setHours(selectedDate.getHours() + 1);
+            const date = selectedDate.toISOString();
+
             const response = await fetch(
                 import.meta.env.VITE_REACT_APP_URL_API +
-                    `/trainingInstance/${user.email}`
+                    `/trainingInstance/${user.email}/${date}`
             );
             const data = await response.json();
+            selectedDate.setHours(selectedDate.getHours() - 1);
             if (response.ok) {
                 setTrainingInstances(data.trainings_list);
             } else {
-                console.error(data.error);
+                console.error(data.message);
             }
         };
-        if (user) {
+        if (user && selectedDate) {
             fetchUserTrainingInstances();
         }
-    }, [user, refresh]);
-
+    }, [user, refresh, selectedDate]);
+    //change it to something prettier
     return (
         <div className="trainingInstance">
             {trainingInstances.length > 0 ? (
                 trainingInstances.map((training, index) => (
                     <div key={index}>
                         <div className="training-header">
-                            <h2>{training.name}</h2>
+                            <h1>{training.name}</h1>
                             <a>
                                 {new Date(training.date).toLocaleDateString()}
                             </a>
@@ -55,7 +63,7 @@ export default function UserTrainigInstances({ refresh, setRefresh }) {
                     </div>
                 ))
             ) : (
-                <p> no training found</p>
+                <p> no trainings found</p>
             )}
         </div>
     );

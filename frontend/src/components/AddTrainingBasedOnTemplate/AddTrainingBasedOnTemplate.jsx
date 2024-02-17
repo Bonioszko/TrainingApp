@@ -3,7 +3,7 @@ import { UserContext } from "../../../context/userContext.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { useContext } from "react";
-
+import "./addTrainingBasedOnTemplate.css";
 export default function AddTrainingBasedOnTemplate(props) {
     const { user, setUser } = useContext(UserContext);
 
@@ -66,32 +66,38 @@ export default function AddTrainingBasedOnTemplate(props) {
 
     return props.trigger ? (
         <div className="popup">
-            <div className="popup-inner">
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="name">Name:</label>
-                    <br />
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={data.name}
-                        onChange={(e) =>
-                            setData({ ...data, name: e.target.value })
-                        }
-                    />
-                    <br />
-                    <label htmlFor="name">Name:</label>
-                    <br />
-                    <input
-                        type="date"
-                        id="date"
-                        name="date"
-                        value={data.date}
-                        onChange={(e) =>
-                            setData({ ...data, date: e.target.value })
-                        }
-                    />
-                    <br />
+            <div className="popup-inner-template">
+                <form
+                    onSubmit={handleSubmit}
+                    className="form-training-template"
+                >
+                    <h2>Add Training</h2>
+                    <div className="form-field">
+                        {" "}
+                        <label htmlFor="name">Name:</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            value={data.name}
+                            onChange={(e) =>
+                                setData({ ...data, name: e.target.value })
+                            }
+                        />
+                    </div>
+                    <div className="form-field">
+                        {" "}
+                        <label htmlFor="name">Date:</label>
+                        <input
+                            type="date"
+                            id="date"
+                            name="date"
+                            value={data.date}
+                            onChange={(e) =>
+                                setData({ ...data, date: e.target.value })
+                            }
+                        />
+                    </div>
 
                     <button type="submit"> submit</button>
                 </form>

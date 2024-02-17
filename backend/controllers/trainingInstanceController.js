@@ -34,21 +34,26 @@ const changeTrainingInstance = asyncHandler(async (req, res, next) => {
     }
 });
 const getTrainingsInstancesForUser = asyncHandler(async (req, res, next) => {
-    const { email } = req.params;
+    const { email, date } = req.params;
+
     const user = await User.findOne({ email: email });
     if (!user) {
         return res.status(400).json({ error: "User does not exist" });
     }
     const allTrainingInstances = await TrainingInstance.find({
         doneBy: user._id,
+        date: date,
     }).populate("exercises");
+
     if (allTrainingInstances) {
         res.status(200).json({
             title: "allTrainingInstances",
             trainings_list: allTrainingInstances,
         });
     } else {
-        return res.status(400).json({ message: "User does not have trainins" });
+        return res
+            .status(400)
+            .json({ message: "User does not have trainings" });
     }
 });
 const createTrainingInstance = asyncHandler(async (req, res, next) => {

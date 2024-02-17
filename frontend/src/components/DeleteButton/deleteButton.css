@@ -10,6 +10,7 @@ a.my-button{
     background-image: url('../../assets/thrash.svg');
     background-repeat: no-repeat;
     background-size: contain;
+    background-position: center;
     display: flex;
     justify-content: center;
     border: 0px solid #000;
