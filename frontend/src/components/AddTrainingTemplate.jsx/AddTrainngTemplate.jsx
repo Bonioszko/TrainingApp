@@ -20,8 +20,8 @@ export default function AddTrainingTemplate(props) {
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setTrainingTemplate({ ...trainingTemplate, creator: user.email });
-        const { creator, name, exercises } = trainingTemplate;
+        setTrainingTemplate({ ...trainingTemplate });
+        const { name, exercises } = trainingTemplate;
 
         try {
             const response = await fetch(
@@ -31,7 +31,11 @@ export default function AddTrainingTemplate(props) {
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({ name, email: creator, exercises }),
+                    body: JSON.stringify({
+                        name,
+                        email: user.email,
+                        exercises,
+                    }),
                 }
             );
             const responseData = await response.json();
@@ -78,7 +82,9 @@ export default function AddTrainingTemplate(props) {
                 <h1>Add training template</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="form-field">
-                        <label htmlFor="">Name</label>
+                        <label htmlFor="" className="name">
+                            Name
+                        </label>
                         <input
                             type="text"
                             placeholder="enter name"
@@ -92,7 +98,9 @@ export default function AddTrainingTemplate(props) {
                         />
                     </div>
                     <div className="form-field">
-                        <label>Add exercise</label>
+                        <label className="exercise-dropdown">
+                            Add exercise
+                        </label>
                         <div className="exercise-add">
                             <Dropdown
                                 name="exercise"
@@ -104,17 +112,21 @@ export default function AddTrainingTemplate(props) {
                                 onClick={handleExerciseAdd}
                             ></ButtonPlus>
                         </div>
-
-                        {trainingTemplate.exercises.map((exercise, index) => (
-                            <div key={index} className="exercise-field">
-                                <label htmlFor="">{exercise}</label>
-                                <DeleteButton
-                                    onClick={() =>
-                                        handleExerciseDelete(exercise)
-                                    }
-                                ></DeleteButton>
-                            </div>
-                        ))}
+                        <div className="list-exercises">
+                            {" "}
+                            {trainingTemplate.exercises.map(
+                                (exercise, index) => (
+                                    <div key={index} className="exercise-field">
+                                        <label htmlFor="">{exercise}</label>
+                                        <DeleteButton
+                                            onClick={() =>
+                                                handleExerciseDelete(exercise)
+                                            }
+                                        ></DeleteButton>
+                                    </div>
+                                )
+                            )}
+                        </div>
                     </div>
                     <button type="submit"> submit</button>
                 </form>

@@ -1,1 +1,9 @@
-module.exports = ["Arms", "Legs", "Chest", "Back", "Shoulders", "Abs"];
+module.exports = [
+    "Biceps",
+    "Triceps",
+    "Legs",
+    "Chest",
+    "Back",
+    "Shoulders",
+    "Abs",
+];

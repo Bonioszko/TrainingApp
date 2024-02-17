@@ -23,7 +23,9 @@
     border: 3px solid var(--third-color);
     border-radius: 20px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+
     gap: 20px;
 }
 .exercise-instance{

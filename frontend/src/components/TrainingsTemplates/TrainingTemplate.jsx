@@ -38,6 +38,7 @@ export default function TrainingTemplate({ refresh, setRefresh }) {
             setUserTrainingTemplate([]);
         }
     }, [user, trainingPopup]);
+
     return (
         <div className="training-template">
             <h1>Training Templates</h1>
@@ -51,7 +52,6 @@ export default function TrainingTemplate({ refresh, setRefresh }) {
                             setCurrentTraining(training);
                         }}
                     >
-                        <DeleteButton></DeleteButton>
                         <h1>{training.name}</h1>{" "}
                         <ButtonPlus
                             onClick={() => {

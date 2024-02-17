@@ -5,7 +5,8 @@ nav{
     flex-direction: row;
     justify-content: space-around;
     gap: 20px;
-    height: 100%;
+    height: min(100%, 100px);
+
     align-items: center;
 }
 

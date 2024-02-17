@@ -8,3 +8,9 @@
     display: flex;
     justify-content: space-between;
 }
+
+.list-exercises{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}

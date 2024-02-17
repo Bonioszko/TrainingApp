@@ -79,17 +79,38 @@ export default function Profile() {
         );
 
         if (response.ok) {
-            setRefresh((prevRefresh) => !prevRefresh);
             toast.success("Exercise Deleted");
+            setRefresh((prevRefresh) => !prevRefresh);
         } else {
             console.error("Failed to delete exercise");
+        }
+    };
+    const handleDeleteTemplate = async (templateName) => {
+        const response = await fetch(
+            import.meta.env.VITE_REACT_APP_URL_API + `/training`,
+            {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: templateName,
+                    email: user.email,
+                }),
+            }
+        );
+        if (response.ok) {
+            setRefresh((prevRefresh) => !prevRefresh);
+            toast.success("Template deleted");
+        } else {
+            console.error("Failed to delete template");
         }
     };
     return (
         <div className="main">
             <Navbar></Navbar>
             <div className="page">
-                <div>
+                <div className="left">
                     {userExercises.length > 0 ? (
                         userExercises.map((exercise, index) => (
                             <div key={index} className="exercise-list">
@@ -116,11 +137,19 @@ export default function Profile() {
                         setTrigger={setExercisePopup}
                     ></AddExercise>
                 </div>
-                <div>
+                <div className="right">
                     {userTrainingTemplate.length > 0 ? (
                         userTrainingTemplate.map((training, index) => (
-                            <div key={index}>
+                            <div
+                                key={index}
+                                className="trainig-template-instance"
+                            >
                                 <h1>{training.name}</h1>
+                                <DeleteButton
+                                    onClick={() =>
+                                        handleDeleteTemplate(training.name)
+                                    }
+                                ></DeleteButton>
                             </div>
                         ))
                     ) : (

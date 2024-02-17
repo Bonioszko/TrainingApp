@@ -79,9 +79,13 @@ export default function AddExercise(props) {
                         >
                             {" "}
                             <option value=""></option>
-                            <option value="Arms">Arms</option>
+                            <option value="Biceps">Biceps</option>
+                            <option value="Triceps">Triceps</option>
                             <option value="Legs">Legs</option>
                             <option value="Chest">Chest</option>
+                            <option value="Back">Back</option>
+                            <option value="Shoulders">Shoulders</option>
+                            <option value="Abs">Abs</option>
                         </select>
                     </div>
 
