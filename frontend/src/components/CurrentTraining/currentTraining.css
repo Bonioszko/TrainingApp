@@ -9,15 +9,41 @@
     justify-content: center;
     align-items: center;
 }
-.popup-inner{
+
+.popup-inner-training{
+    background-color: var(--second-color);
     position: relative;
     padding: 32px;
     width: 100%;
     max-width: 500px;
-    background-color: blue;
+    border-radius: 20px;
 }
-.popup-inner .close-btn{
-    position: absolute;
-    top: 16px;
-    right: 16px;
+
+.exercise{
+    border: 3px solid var(--third-color);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.exercise-instance{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.buttons{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.submit,.close{
+
+    width: 30%;
+    height: 40px;
+    margin: 10px;
+}
+.close{
+    background-color:#B72020;
 }

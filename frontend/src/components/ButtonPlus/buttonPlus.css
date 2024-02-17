@@ -2,6 +2,7 @@
   background-image: url('../../assets/plus.svg');
   background-repeat: no-repeat;
   background-size: contain;
+  background-position: center;
   width: 20px;
   height: 20px;
 }

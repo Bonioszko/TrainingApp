@@ -1,0 +1,22 @@
+.trainig-template-instance{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+    padding: 6px;
+    width: 100%;
+    border: 2px solid white;
+    border-radius: 20px;
+    height: 50px;
+
+}
+.training-template{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.add{
+    width: 40px;
+    height: 40px;
+}

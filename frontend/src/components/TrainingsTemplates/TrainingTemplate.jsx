@@ -4,7 +4,7 @@ import AddTrainingBasedOnTemplate from "../AddTrainingBasedOnTemplate/AddTrainin
 import ButtonPlus from "../ButtonPlus/ButtonPlus.jsx";
 import CurrentTraining from "../CurrentTraining/CurrentTraining.jsx";
 import Dropdown from "../Dropdown/Dropdown";
-
+import "./trainingTemplate.css";
 export default function TrainingTemplate({ refresh, setRefresh }) {
     const [userTrainingTemplate, setUserTrainingTemplate] = useState([]);
     const { user, setUser } = useContext(UserContext);
@@ -39,16 +39,18 @@ export default function TrainingTemplate({ refresh, setRefresh }) {
     }, [user, trainingPopup]);
     return (
         <div className="training-template">
+            <h1>Training Templetes</h1>
             {userTrainingTemplate.length > 0 ? (
                 userTrainingTemplate.map((training, index) => (
                     <div
+                        className="trainig-template-instance"
                         key={index}
                         onClick={() => {
                             setTrainingPopup(true);
                             setCurrentTraining(training);
                         }}
                     >
-                        <h2>{training.name}</h2>
+                        <h1>{training.name}</h1>
                         <ButtonPlus
                             onClick={() => {
                                 setTrainingPopup(true);

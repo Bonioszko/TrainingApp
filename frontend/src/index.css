@@ -6,9 +6,10 @@
 }
 :root{
   --main-color: #191A19;
-  --second-color: #4E9F3D;
+  --second-color: #1E5128;
   --third-color:  #e0e0e0;
-  --fourth-color: #1E5128;
+
+  --fourth-color:#4E9F3D ;
    Font-family: Consolas, monaco, monospace;
    font-weight: bold;
 
@@ -82,11 +83,12 @@ select {
   }
 }
 #root{
-height: 100vh;
+min-height: 100vh;
 
 }
 .main{
   height: 100%;
+  min-height: 100vh;
   background-color: var(--main-color);
   display: grid;
   grid-template-rows: 1fr 9fr;

@@ -8,16 +8,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 99999999;
 }
-.popup-inner{
+.popup-inner-template{
     position: relative;
     padding: 32px;
     width: 100%;
     max-width: 500px;
-    background-color: blue;
+    background-color:var(--second-color);
+    border-radius: 20px;
+
 }
-.popup-inner .close-btn{
+.popup-inner-template .close-btn{
     position: absolute;
     top: 16px;
     right: 16px;
+}
+.form-training-template{
+
 }

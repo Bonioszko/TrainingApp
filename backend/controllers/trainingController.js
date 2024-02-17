@@ -17,7 +17,7 @@ const addTrainingTemplate = asyncHandler(async (req, res, next) => {
     let exercisesIds = [];
     const user = await User.findOne({ email: email });
     console.log(user);
-    if (exercises) {
+    if (exercises && user) {
         for (let i = 0; i < exercises.length; i++) {
             const id = await Exercise.findOne({
                 name: exercises[i],

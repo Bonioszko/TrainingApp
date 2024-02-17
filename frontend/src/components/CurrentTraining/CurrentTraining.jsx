@@ -4,6 +4,7 @@ import CloseButton from "../CloseButton/CloseButton.jsx";
 import SetsInList from "../SetsInList/SetsInList.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+import "./currentTraining.css";
 // export default function CurrentTraining({
 //     trainingInstance,
 //     setTrainingInstancePopup,
@@ -69,37 +70,39 @@ export default function CurrentTraining({
         }
     };
     const addSet = (exerciseIndex) => {
-        const exercise = { ...trainingChanged.exercises[exerciseIndex] };
-        exercise.sets.push(sets[exerciseIndex]);
+        const set = sets[exerciseIndex];
+        if (set.kilograms > 0 && set.repetitions > 0) {
+            const exercise = { ...trainingChanged.exercises[exerciseIndex] };
+            exercise.sets.push(set);
 
-        setTrainingChanged({
-            ...trainingChanged,
-            exercises: trainingChanged.exercises.map((ex, index) =>
-                index === exerciseIndex ? exercise : ex
-            ),
-        });
+            setTrainingChanged({
+                ...trainingChanged,
+                exercises: trainingChanged.exercises.map((ex, index) =>
+                    index === exerciseIndex ? exercise : ex
+                ),
+            });
 
-        setSets(
-            sets.map((set, index) =>
-                index === exerciseIndex
-                    ? { kilograms: "", repetitions: "" }
-                    : set
-            )
-        );
+            setSets(
+                sets.map((set, index) =>
+                    index === exerciseIndex
+                        ? { kilograms: "", repetitions: "" }
+                        : set
+                )
+            );
+        } else {
+            toast.warn("Kilograms and repetitions must be greater than 0");
+        }
     };
 
     return (
         <div className="popup">
-            <div className="popup-inner">
-                <CloseButton
-                    onClick={() => setTrainingInstancePopup(false)}
-                ></CloseButton>
-                {trainingChanged.name}
-                <div>
+            <div className="popup-inner-training">
+                <h1>{trainingChanged.name}</h1>
+                <div className="exercise">
                     {trainingChanged.exercises.map((exercise, index) => (
-                        <div key={index}>
-                            {exercise.name}
-                            <h1>previuos Sets</h1>
+                        <div key={index} className="exercise-instance">
+                            <h1>{exercise.name}</h1>
+                            <h3>previuos Sets</h3>
                             {exercise.sets.map((set, setIndex) => (
                                 <div key={setIndex}>
                                     {/* <div>Kilograms: {set.kilograms}</div>
@@ -107,48 +110,61 @@ export default function CurrentTraining({
                                     <SetsInList set={set}></SetsInList>
                                 </div>
                             ))}
-                            <input
-                                type="number"
-                                placeholder="Kilograms"
-                                value={sets[index].kilograms}
-                                onChange={(e) =>
-                                    setSets(
-                                        sets.map((set, setIndex) =>
-                                            setIndex === index
-                                                ? {
-                                                      ...set,
-                                                      kilograms: e.target.value,
-                                                  }
-                                                : set
+                            <div className="input-sets">
+                                {" "}
+                                <input
+                                    type="number"
+                                    placeholder="Kilograms"
+                                    value={sets[index].kilograms}
+                                    onChange={(e) =>
+                                        setSets(
+                                            sets.map((set, setIndex) =>
+                                                setIndex === index
+                                                    ? {
+                                                          ...set,
+                                                          kilograms:
+                                                              e.target.value,
+                                                      }
+                                                    : set
+                                            )
                                         )
-                                    )
-                                }
-                            />
-                            <input
-                                type="number"
-                                placeholder="Repetitions"
-                                value={sets[index].repetitions}
-                                onChange={(e) =>
-                                    setSets(
-                                        sets.map((set, setIndex) =>
-                                            setIndex === index
-                                                ? {
-                                                      ...set,
-                                                      repetitions:
-                                                          e.target.value,
-                                                  }
-                                                : set
+                                    }
+                                />
+                                <input
+                                    type="number"
+                                    placeholder="Repetitions"
+                                    value={sets[index].repetitions}
+                                    onChange={(e) =>
+                                        setSets(
+                                            sets.map((set, setIndex) =>
+                                                setIndex === index
+                                                    ? {
+                                                          ...set,
+                                                          repetitions:
+                                                              e.target.value,
+                                                      }
+                                                    : set
+                                            )
                                         )
-                                    )
-                                }
-                            />
-                            <button onClick={() => addSet(index)}>
-                                Add Set
-                            </button>
+                                    }
+                                />
+                                <button onClick={() => addSet(index)}>
+                                    Add Set
+                                </button>
+                            </div>
                         </div>
                     ))}
                 </div>
-                <button onClick={handleSubmit}>submit</button>
+                <div className="buttons">
+                    {" "}
+                    <CloseButton
+                        className="close"
+                        onClick={() => setTrainingInstancePopup(false)}
+                    ></CloseButton>
+                    <button onClick={handleSubmit} className="submit">
+                        submit
+                    </button>
+                </div>
             </div>
             <ToastContainer />
         </div>

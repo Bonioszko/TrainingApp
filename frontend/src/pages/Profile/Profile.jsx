@@ -91,7 +91,7 @@ export default function Profile() {
                 <div>
                     {userExercises.length > 0 ? (
                         userExercises.map((exercise, index) => (
-                            <div key={index}>
+                            <div key={index} className="exercise-list">
                                 <h1>{exercise.name}</h1>
                                 {exercise.creator ? (
                                     <DeleteButton
