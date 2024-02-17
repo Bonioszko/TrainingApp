@@ -14,7 +14,9 @@
     padding: 32px;
     width: 100%;
     max-width: 500px;
-    background-color: blue;
+    background-color: var(--second-color);
+    border-radius: 20px;
+
 }
 .popup-inner .close-btn{
     position: absolute;

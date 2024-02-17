@@ -10,6 +10,7 @@ import Popup from "../../components/Popup/Popup.jsx";
 import AddTrainingTemplate from "../../components/AddTrainingTemplate.jsx/AddTrainngTemplate.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+import "./profile.css";
 export default function Profile() {
     const { user, setUser } = useContext(UserContext);
     const [userExercises, setUserExercises] = useState([]);

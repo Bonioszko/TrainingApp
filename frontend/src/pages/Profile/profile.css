@@ -1,0 +1,13 @@
+.exercise-list{
+    display: flex;
+    flex-direction:row;
+    border: 2px solid var(--third-color);
+    border-radius: 20px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+.exercise-list>.my-button{
+    height: 30px;
+    width: 30px;
+}

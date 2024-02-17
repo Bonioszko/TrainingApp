@@ -7,7 +7,7 @@ function App() {
             <Navbar></Navbar>
             <div className="page">
                 <h1>Welcome to our app, to access content please login</h1>
-                <TrainingTemplate></TrainingTemplate>
+                {/* <TrainingTemplate></TrainingTemplate> */}
             </div>
         </div>
     );

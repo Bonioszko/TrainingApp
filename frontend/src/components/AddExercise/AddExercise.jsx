@@ -50,35 +50,40 @@ export default function AddExercise(props) {
         <div className="popup">
             <div className="popup-inner">
                 <form onSubmit={handleSubmit}>
-                    <label htmlFor="exerciseName">Exercise Name:</label>
-                    <br />
-                    <input
-                        type="text"
-                        id="exerciseName"
-                        name="exerciseName"
-                        value={data.exerciseName}
-                        onChange={(e) =>
-                            setData({ ...data, exerciseName: e.target.value })
-                        }
-                    />
-                    <br />
-                    <label htmlFor="bodyPart">Body Part:</label>
-                    <br />
-                    <select
-                        id="bodyPart"
-                        name="bodyPart"
-                        value={data.bodyPart}
-                        onChange={(e) =>
-                            setData({ ...data, bodyPart: e.target.value })
-                        }
-                    >
+                    <div className="form-field">
                         {" "}
-                        <option value=""></option>
-                        <option value="Arms">Arms</option>
-                        <option value="Legs">Legs</option>
-                        <option value="Chest">Chest</option>
-                    </select>
-                    <br />
+                        <label htmlFor="exerciseName">Exercise Name:</label>
+                        <input
+                            type="text"
+                            id="exerciseName"
+                            name="exerciseName"
+                            value={data.exerciseName}
+                            onChange={(e) =>
+                                setData({
+                                    ...data,
+                                    exerciseName: e.target.value,
+                                })
+                            }
+                        />
+                    </div>
+                    <div className="form-field">
+                        <label htmlFor="bodyPart">Body Part:</label>
+
+                        <select
+                            id="bodyPart"
+                            name="bodyPart"
+                            value={data.bodyPart}
+                            onChange={(e) =>
+                                setData({ ...data, bodyPart: e.target.value })
+                            }
+                        >
+                            {" "}
+                            <option value=""></option>
+                            <option value="Arms">Arms</option>
+                            <option value="Legs">Legs</option>
+                            <option value="Chest">Chest</option>
+                        </select>
+                    </div>
 
                     <button type="submit"> submit</button>
                 </form>

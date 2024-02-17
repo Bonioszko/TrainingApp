@@ -20,3 +20,9 @@
     width: 40px;
     height: 40px;
 }
+
+.buttons-templates{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}

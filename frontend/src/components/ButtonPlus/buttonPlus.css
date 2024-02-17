@@ -3,6 +3,11 @@
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+
   width: 20px;
   height: 20px;
+}
+.add:hover{
+  background: linear-gradient(to right,#E0D7D7 ,#E0D7D7);
+
 }

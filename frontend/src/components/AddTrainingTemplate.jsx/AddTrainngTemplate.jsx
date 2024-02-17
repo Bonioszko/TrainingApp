@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import Dropdown from "../Dropdown/Dropdown.jsx";
 import ButtonPlus from "../ButtonPlus/ButtonPlus.jsx";
 import DeleteButton from "../DeleteButton/DeleteButton.jsx";
+import "./addTrainingTemplate.css";
 export default function AddTrainingTemplate(props) {
     const { user, setUser } = useContext(UserContext);
     const [trainingTemplate, setTrainingTemplate] = useState({
@@ -18,8 +19,8 @@ export default function AddTrainingTemplate(props) {
         setSelectedExercise(newExercise);
     };
     const handleSubmit = async (e) => {
-        setTrainingTemplate({ ...trainingTemplate, creator: user.email });
         e.preventDefault();
+        setTrainingTemplate({ ...trainingTemplate, creator: user.email });
         const { creator, name, exercises } = trainingTemplate;
 
         try {
@@ -74,6 +75,7 @@ export default function AddTrainingTemplate(props) {
     return props.trigger ? (
         <div className="popup">
             <div className="popup-inner">
+                <h1>Add training template</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="form-field">
                         <label htmlFor="">Name</label>
@@ -90,18 +92,22 @@ export default function AddTrainingTemplate(props) {
                         />
                     </div>
                     <div className="form-field">
-                        <Dropdown
-                            name="exercise"
-                            listItems={props.userExercises}
-                            onValueChange={handleExerciseChange}
-                        ></Dropdown>
-                        <ButtonPlus
-                            type="button"
-                            onClick={handleExerciseAdd}
-                        ></ButtonPlus>
+                        <label>Add exercise</label>
+                        <div className="exercise-add">
+                            <Dropdown
+                                name="exercise"
+                                listItems={props.userExercises}
+                                onValueChange={handleExerciseChange}
+                            ></Dropdown>
+                            <ButtonPlus
+                                type="button"
+                                onClick={handleExerciseAdd}
+                            ></ButtonPlus>
+                        </div>
+
                         {trainingTemplate.exercises.map((exercise, index) => (
-                            <div key={index}>
-                                {exercise}
+                            <div key={index} className="exercise-field">
+                                <label htmlFor="">{exercise}</label>
                                 <DeleteButton
                                     onClick={() =>
                                         handleExerciseDelete(exercise)

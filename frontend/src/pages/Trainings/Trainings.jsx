@@ -36,6 +36,7 @@ export default function Trainings() {
                             selectedDate={selectedDate}
                             setSelectedDate={setSelectedDate}
                         ></Calendar> */}
+                        <h1>Choose date of your training</h1>
                         <input
                             className="date-training"
                             type="date"
