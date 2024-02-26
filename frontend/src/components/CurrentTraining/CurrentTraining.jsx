@@ -5,28 +5,8 @@ import SetsInList from "../SetsInList/SetsInList.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import "./currentTraining.css";
-// export default function CurrentTraining({
-//     trainingInstance,
-//     setTrainingInstancePopup,
-// }) {
-//     const [trainingChanged, setTrainingChanged] = useState(trainingInstance);
-//     console.log(trainingChanged);
-//     return (
-//         <div className="popup">
-//             <div className="popup-inner">
-//                 <CloseButton
-//                     onClick={() => setTrainingInstancePopup(false)}
-//                 ></CloseButton>
-//                 {trainingChanged.name}
-//                 <div>
-//                     {trainingChanged.exercises.map((exercise, index) => (
-//                         <div key={index}>{exercise.name}</div>
-//                     ))}
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// }
+import DeleteButton from "../DeleteButton/DeleteButton.jsx";
+import Stopwatch from "../stopwatch/Stopwatch.jsx";
 export default function CurrentTraining({
     trainingInstance,
     setTrainingInstancePopup,
@@ -93,11 +73,22 @@ export default function CurrentTraining({
             toast.warn("Kilograms and repetitions must be greater than 0");
         }
     };
+    const deleteSet = (exerciseIndex, setIndex) => {
+        const exercise = { ...trainingChanged.exercises[exerciseIndex] };
+        exercise.sets.splice(setIndex, 1);
 
+        setTrainingChanged({
+            ...trainingChanged,
+            exercises: trainingChanged.exercises.map((ex, index) =>
+                index === exerciseIndex ? exercise : ex
+            ),
+        });
+    };
     return (
         <div className="popup">
             <div className="popup-inner-training">
                 <h1>{trainingChanged.name}</h1>
+                <Stopwatch></Stopwatch>
                 <div className="exercise">
                     {trainingChanged.exercises.map((exercise, index) => (
                         <div key={index} className="exercise-instance">
@@ -107,7 +98,15 @@ export default function CurrentTraining({
                                 <div key={setIndex}>
                                     {/* <div>Kilograms: {set.kilograms}</div>
                                     <div>Repetitions: {set.repetitions}</div> */}
-                                    <SetsInList set={set}></SetsInList>
+                                    <div className="sets-with-button">
+                                        {" "}
+                                        <SetsInList set={set}></SetsInList>
+                                        <DeleteButton
+                                            onClick={() =>
+                                                deleteSet(index, setIndex)
+                                            }
+                                        ></DeleteButton>
+                                    </div>
                                 </div>
                             ))}
                             <div className="input-sets">

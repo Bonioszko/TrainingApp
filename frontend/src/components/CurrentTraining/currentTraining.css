@@ -49,3 +49,8 @@
 .close{
     background-color:#B72020;
 }
+.sets-with-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

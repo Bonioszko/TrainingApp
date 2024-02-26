@@ -10,6 +10,7 @@ import Popup from "../../components/Popup/Popup.jsx";
 import AddTrainingTemplate from "../../components/AddTrainingTemplate.jsx/AddTrainngTemplate.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+
 import "./profile.css";
 export default function Profile() {
     const { user, setUser } = useContext(UserContext);
@@ -109,8 +110,10 @@ export default function Profile() {
     return (
         <div className="main">
             <Navbar></Navbar>
-            <div className="page">
+
+            <div className="page-profile">
                 <div className="left">
+                    <h1>Exercises</h1>
                     {userExercises.length > 0 ? (
                         userExercises.map((exercise, index) => (
                             <div key={index} className="exercise-list">
@@ -127,17 +130,16 @@ export default function Profile() {
                     ) : (
                         <p>No exercises found</p>
                     )}
-
                     <ButtonPlus
                         onClick={() => setExercisePopup(true)}
                     ></ButtonPlus>
-
                     <AddExercise
                         trigger={exercisePopup}
                         setTrigger={setExercisePopup}
                     ></AddExercise>
                 </div>
                 <div className="right">
+                    <h1>Training templates</h1>
                     {userTrainingTemplate.length > 0 ? (
                         userTrainingTemplate.map((training, index) => (
                             <div
@@ -155,7 +157,6 @@ export default function Profile() {
                     ) : (
                         <p>No training templates found</p>
                     )}
-
                     <ButtonPlus
                         onClick={() => {
                             setTrainingPopup(true);
