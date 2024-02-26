@@ -11,7 +11,7 @@ const cors = require("cors");
 
 const allowedOrigins = [
     "http://localhost:5173",
-    "https://trainingapp-1.onrender.com/",
+    "https://trainingapp-1.onrender.com",
 ];
 router.use(
     cors({
