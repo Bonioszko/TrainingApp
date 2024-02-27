@@ -7,20 +7,10 @@ const {
     changeTrainingInstance,
     getTrainingsInstancesForUser,
 } = require("../controllers/trainingInstanceController");
-const allowedOrigins = [
-    "http://localhost:5173",
-    "https://trainingapp-1.onrender.com",
-];
 router.use(
     cors({
+        origin: ["http://localhost:5173", "https://trainingapp-1.onrender.com"],
         credentials: true,
-        origin: function (origin, callback) {
-            if (allowedOrigins.includes(origin)) {
-                callback(null, true);
-            } else {
-                callback(new Error("Not allowed by CORS"));
-            }
-        },
     })
 );
 router.post("/", createTrainingInstance);
