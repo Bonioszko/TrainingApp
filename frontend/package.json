@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "backend": "file:..",
     "flowbite-react": "^0.7.2",
     "react": "^18.2.0",
     "react-datepicker": "^6.1.0",
