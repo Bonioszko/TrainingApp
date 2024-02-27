@@ -15,6 +15,7 @@ router.use(
     cors({
         credentials: true,
         origin: function (origin, callback) {
+            console.log(origin);
             if (allowedOrigins.includes(origin)) {
                 callback(null, true);
             } else {
