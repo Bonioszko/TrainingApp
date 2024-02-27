@@ -7,7 +7,7 @@ export function UserContextProvider({ children }) {
     useEffect(() => {
         if (!user) {
             console.log();
-            fetch(import.meta.env.VITE_REACT_APP_URL_API + "/auth/profile", {
+            fetch("/api/auth/profile", {
                 credentials: "include", // Include this line
             })
                 .then((response) => response.json())

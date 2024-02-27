@@ -18,17 +18,14 @@ export default function Login() {
         e.preventDefault();
         const { email, password } = data;
         try {
-            const response = await fetch(
-                import.meta.env.VITE_REACT_APP_URL_API + "/auth/login",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    credentials: "include",
-                    body: JSON.stringify({ email, password }),
-                }
-            );
+            const response = await fetch("/api/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify({ email, password }),
+            });
             const responseData = await response.json();
             console.log(responseData);
             if (responseData.error) {

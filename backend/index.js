@@ -20,9 +20,9 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 app.get("/", (req, res) => {
     return res.json("test is wotrking ");
 });
-app.use("/auth", require("./routes/authRouter"));
-app.use("/exercise", require("./routes/exerciseRouter"));
-app.use("/training", require("./routes/trainingRouter"));
-app.use("/trainingInstance", require("./routes/trainingInstanceRouter"));
+app.use("/api/auth", require("./routes/authRouter"));
+app.use("/api/exercise", require("./routes/exerciseRouter"));
+app.use("/api/training", require("./routes/trainingRouter"));
+app.use("/api/trainingInstance", require("./routes/trainingInstanceRouter"));
 const port = 8000;
 app.listen(port, () => console.log(`Server is running on port ${port}`));

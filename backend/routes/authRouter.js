@@ -7,17 +7,18 @@ const {
     getProfile,
     logout,
 } = require("../controllers/authController");
-const cors = require("cors");
+// const cors = require("cors");
 
-router.use(
-    cors({
-        origin: [
-            "http://localhost:5173",
-            "https://trainingappfull.onrender.com",
-        ],
-        credentials: true,
-    })
-);
+// router.use(
+//     cors({
+//         origin: [
+//             "http://localhost:5173",
+//             "http://localhost:3000",
+//             "https://trainingappfull.onrender.com",
+//         ],
+//         credentials: true,
+//     })
+// );
 
 router.get("/", test);
 router.post("/register", registerUser);

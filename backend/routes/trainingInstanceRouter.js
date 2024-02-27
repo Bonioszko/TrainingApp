@@ -7,12 +7,16 @@ const {
     changeTrainingInstance,
     getTrainingsInstancesForUser,
 } = require("../controllers/trainingInstanceController");
-router.use(
-    cors({
-        origin: ["http://localhost:5173", "https://trainingapp-1.onrender.com"],
-        credentials: true,
-    })
-);
+// router.use(
+//     cors({
+//         origin: [
+//             "http://localhost:5173",
+//             "http://localhost:3000",
+//             "https://trainingapp-1.onrender.com",
+//         ],
+//         credentials: true,
+//     })
+// );
 router.post("/", createTrainingInstance);
 router.get("/", getTrainingInstance);
 router.get("/:email/:date", getTrainingsInstancesForUser);
