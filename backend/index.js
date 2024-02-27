@@ -11,6 +11,9 @@ db.on("error", console.error.bind(console, "mongo connection error"));
 app.use(express.json()); // for parsing application/json
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.get("/", (req, res) => {
+    return res.json("test is wotrking ");
+});
 app.use("/auth", require("./routes/authRouter"));
 app.use("/exercise", require("./routes/exerciseRouter"));
 app.use("/training", require("./routes/trainingRouter"));
