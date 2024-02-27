@@ -16,20 +16,17 @@ export default function AddExercise(props) {
         const { exerciseName, bodyPart } = data;
 
         try {
-            const response = await fetch(
-                import.meta.env.VITE_REACT_APP_URL_API + "/exercise",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        exerciseName,
-                        bodyPart,
-                        email: user.email,
-                    }),
-                }
-            );
+            const response = await fetch("/api/exercise", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    exerciseName,
+                    bodyPart,
+                    email: user.email,
+                }),
+            });
 
             const data = await response.json();
 

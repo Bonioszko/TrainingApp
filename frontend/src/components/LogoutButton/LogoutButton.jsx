@@ -6,13 +6,10 @@ export default function LogoutButton() {
     const { user, setUser } = useContext(UserContext);
     const handleLogout = async () => {
         // Make a request to your server's logout endpoint
-        const response = await fetch(
-            import.meta.env.VITE_REACT_APP_URL_API + "/auth/logout",
-            {
-                method: "POST",
-                credentials: "include",
-            }
-        );
+        const response = await fetch("/api/auth/logout", {
+            method: "POST",
+            credentials: "include",
+        });
 
         if (response.ok) {
             // If the logout was successful, clear the user context

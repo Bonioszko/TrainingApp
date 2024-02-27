@@ -24,20 +24,17 @@ export default function AddTrainingTemplate(props) {
         const { name, exercises } = trainingTemplate;
 
         try {
-            const response = await fetch(
-                import.meta.env.VITE_REACT_APP_URL_API + "/training",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        name,
-                        email: user.email,
-                        exercises,
-                    }),
-                }
-            );
+            const response = await fetch("/api/training", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name,
+                    email: user.email,
+                    exercises,
+                }),
+            });
             const responseData = await response.json();
 
             // Handle response data as needed
