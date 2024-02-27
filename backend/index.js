@@ -1,6 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
-import path from "path";
+const path = require("path");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
@@ -8,11 +8,11 @@ const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGODB_KEY);
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
-const __dirname = path.resolve();
+const currentDirectory = process.cwd();
 const app = express();
-app.use(express.static(path.join(__dirname, "/frontend/dist")));
+app.use(express.static(path.join(currentDirectory, "/frontend/dist")));
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+    res.sendFile(path.join(currentDirectory, "frontend", "dist", "index.html"));
 });
 app.use(express.json()); // for parsing application/json
 app.use(cookieParser());
