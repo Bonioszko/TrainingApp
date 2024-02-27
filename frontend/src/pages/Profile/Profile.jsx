@@ -59,7 +59,7 @@ export default function Profile() {
     }, [user, trainingPopup, refresh]);
     // const handleSubmit = async (e) => {};
     const handleDelete = async (exerciseName) => {
-        const response = await fetch(`/api/auth/exercise`, {
+        const response = await fetch(`/api/exercise`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -78,7 +78,7 @@ export default function Profile() {
         }
     };
     const handleDeleteTemplate = async (templateName) => {
-        const response = await fetch(`/api/auth/training`, {
+        const response = await fetch(`/api/training`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

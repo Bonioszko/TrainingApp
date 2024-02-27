@@ -20,10 +20,7 @@ export default function TrainingTemplate({ refresh, setRefresh }) {
     const [trainingInstancePopup, setTrainingInstancePopup] = useState(false);
     useEffect(() => {
         const fetchTrainingTemplates = async () => {
-            const response = await fetch(
-                import.meta.env.VITE_REACT_APP_URL_API +
-                    `/training/${user.email}`
-            );
+            const response = await fetch(`/api/training/${user.email}`);
             const data = await response.json();
 
             if (response.ok) {
