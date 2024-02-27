@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/userContext.jsx";
 import { useContext } from "react";
 import Navbar from "../../components/Navbar/Navbar.jsx";
+import "react-toastify/dist/ReactToastify.css";
 import LogoutButton from "../../components/LogoutButton/LogoutButton.jsx";
 export default function Login() {
     const navigate = useNavigate();
@@ -31,7 +32,7 @@ export default function Login() {
             const responseData = await response.json();
             console.log(responseData);
             if (responseData.error) {
-                toast.error(responseData.error);
+                toast.success(responseData.error);
             } else {
                 toast.success("You are logged as: " + responseData.name);
                 setTimeout(() => {
@@ -86,8 +87,8 @@ export default function Login() {
                         <LogoutButton></LogoutButton>
                     </div>
                 )}
+                <ToastContainer></ToastContainer>
             </div>
-            <ToastContainer></ToastContainer>
         </div>
     );
 }
