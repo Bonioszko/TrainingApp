@@ -11,14 +11,14 @@ import "./training.css";
 export default function Trainings() {
     const { user, setUser } = useContext(UserContext);
     const [refresh, setRefresh] = useState(false);
-    const [selectedDate, setSelectedDate] = useState();
-    const formatDate = (date) => {
-        const day = String(date.getDate()).padStart(2, "0");
-        const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are 0-based, so we add 1
-        const year = date.getFullYear();
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    // const formatDate = (date) => {
+    //     const day = String(date.getDate()).padStart(2, "0");
+    //     const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are 0-based, so we add 1
+    //     const year = date.getFullYear();
 
-        return `${day}.${month}.${year}`;
-    };
+    //     return `${day}.${month}.${year}`;
+    // };
     return (
         <div className="main">
             <Navbar></Navbar>

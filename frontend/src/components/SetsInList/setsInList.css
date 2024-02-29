@@ -15,3 +15,9 @@
     text-align: center;
     border-radius: 5px;
 }
+@media  (max-width: 600px) {
+    .sets >div{
+        min-width: 50px;
+        max-width: 110px;
+    }
+}

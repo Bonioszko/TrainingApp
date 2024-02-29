@@ -92,13 +92,14 @@ min-height: 100vh;
   min-height: 100vh;
 
   background-color: var(--main-color);
-  display: grid;
-  grid-template-rows: 1fr 9fr;
+
+
 }
 .page{
   display: flex;
   height: 100%;
   width: 100%;
+  padding-top: 200px;
   justify-content: center;
   align-items: center;
 }
@@ -127,4 +128,10 @@ h2{
 }
 label{
   color:#191A19
+}
+input[type="date"]{
+  color:  black;
+}
+@media  (max-width: 600px) {
+  *{font-size: 16px;}
 }

@@ -10,6 +10,7 @@ export default function UserTrainigInstances({
     const { user, setUser } = useContext(UserContext);
     const [trainingInstances, setTrainingInstances] = useState([]);
     useEffect(() => {
+        console.log(selectedDate);
         const fetchUserTrainingInstances = async () => {
             selectedDate.setHours(selectedDate.getHours() + 1);
             const date = selectedDate.toISOString();

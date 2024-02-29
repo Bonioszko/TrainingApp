@@ -37,9 +37,10 @@ export default function CurrentTraining({
             const data = await response.json();
             if (response.ok) {
                 setRefresh(!refresh);
-                toast.success("training added");
+
                 setTrainingInstancePopup(false);
                 setTrainingChanged(null);
+                toast.success("training added");
             }
         } catch (error) {
             console.error("Error", error);
@@ -82,14 +83,14 @@ export default function CurrentTraining({
         });
     };
     return (
-        <div className="popup">
+        <div className="popup-training">
             <div className="popup-inner-training">
                 <h1>{trainingChanged.name}</h1>
                 <Stopwatch></Stopwatch>
                 <div className="exercise">
                     {trainingChanged.exercises.map((exercise, index) => (
                         <div key={index} className="exercise-instance">
-                            <h1>{exercise.name}</h1>
+                            <h1 className="exercise-name">{exercise.name}</h1>
                             <h3>previuos Sets</h3>
                             {exercise.sets.map((set, setIndex) => (
                                 <div key={setIndex}>
@@ -125,6 +126,7 @@ export default function CurrentTraining({
                                             )
                                         )
                                     }
+                                    className="input-current-training"
                                 />
                                 <input
                                     type="number"
@@ -143,6 +145,7 @@ export default function CurrentTraining({
                                             )
                                         )
                                     }
+                                    className="input-current-training"
                                 />
                                 <button onClick={() => addSet(index)}>
                                     Add Set

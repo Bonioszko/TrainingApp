@@ -6,7 +6,7 @@ nav{
     justify-content: space-around;
     gap: 10px;
     height: min(100%, 100px);
-
+    height: 100px;
     align-items: center;
 }
 
@@ -42,3 +42,12 @@ nav{
     flex:1;
     line-height: 3;
 } */
+@media  (max-width: 600px) {
+    nav{
+        flex-direction: column;
+    }
+}
+
+
+
+
