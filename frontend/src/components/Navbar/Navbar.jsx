@@ -1,20 +1,26 @@
 import { Link } from "react-router-dom";
 
 import { UserContext } from "../../../context/userContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import "./navbar.css";
 import LogoutButton from "../LogoutButton/LogoutButton";
 export default function Navbar() {
     const { user, setUser } = useContext(UserContext);
+    const { showMenu, setShowMenu } = useState(false);
+    const toggleMenu = () => {
+        setShowMenu(!showMenu);
+    };
+    const closeMenuOnMobile = () => {
+        if (window.innerWidth <= 1150) {
+            setShowMenu(false);
+        }
+    };
     const handleLogout = async () => {
         // Make a request to your server's logout endpoint
-        const response = await fetch(
-            import.meta.env.VITE_REACT_APP_URL_API + "/auth/logout",
-            {
-                method: "POST",
-                credentials: "include",
-            }
-        );
+        const response = await fetch("/api/auth/logout", {
+            method: "POST",
+            credentials: "include",
+        });
 
         if (response.ok) {
             // If the logout was successful, clear the user context

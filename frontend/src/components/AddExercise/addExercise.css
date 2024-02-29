@@ -23,3 +23,13 @@
     top: 16px;
     right: 16px;
 }
+
+@media  (max-width: 600px) {
+    .popup{
+        overflow-y: auto;
+    }
+    .popup-inner{
+        overflow-y: auto;
+        padding: 0px;
+    }
+}
