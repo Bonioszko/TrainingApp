@@ -23,10 +23,7 @@ export default function Profile() {
 
     useEffect(() => {
         const fetchExercises = async () => {
-            const response = await fetch(
-                import.meta.env.VITE_REACT_APP_URL_API +
-                    `/exercise/${user.email}`
-            );
+            const response = await fetch(`/api/exercise/${user.email}`);
             const data = await response.json();
 
             if (response.ok) {
@@ -45,10 +42,7 @@ export default function Profile() {
     //not optimal one render when poping up a window
     useEffect(() => {
         const fetchTrainingTemplates = async () => {
-            const response = await fetch(
-                import.meta.env.VITE_REACT_APP_URL_API +
-                    `/training/${user.email}`
-            );
+            const response = await fetch(`/api/training/${user.email}`);
             const data = await response.json();
 
             if (response.ok) {
@@ -65,19 +59,16 @@ export default function Profile() {
     }, [user, trainingPopup, refresh]);
     // const handleSubmit = async (e) => {};
     const handleDelete = async (exerciseName) => {
-        const response = await fetch(
-            import.meta.env.VITE_REACT_APP_URL_API + `/exercise`,
-            {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    exerciseName: exerciseName,
-                    email: user.email,
-                }),
-            }
-        );
+        const response = await fetch(`/api/exercise`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                exerciseName: exerciseName,
+                email: user.email,
+            }),
+        });
 
         if (response.ok) {
             toast.success("Exercise Deleted");
@@ -87,19 +78,16 @@ export default function Profile() {
         }
     };
     const handleDeleteTemplate = async (templateName) => {
-        const response = await fetch(
-            import.meta.env.VITE_REACT_APP_URL_API + `/training`,
-            {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    name: templateName,
-                    email: user.email,
-                }),
-            }
-        );
+        const response = await fetch(`/api/training`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name: templateName,
+                email: user.email,
+            }),
+        });
         if (response.ok) {
             setRefresh((prevRefresh) => !prevRefresh);
             toast.success("Template deleted");

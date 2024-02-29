@@ -23,20 +23,17 @@ export default function CurrentTraining({
     const handleSubmit = async () => {
         const { name, date, exercises } = trainingChanged;
         try {
-            const response = await fetch(
-                import.meta.env.VITE_REACT_APP_URL_API + "/trainingInstance",
-                {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        name: name,
-                        date: date,
-                        exercises: exercises,
-                    }),
-                }
-            );
+            const response = await fetch("/api/trainingInstance", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: name,
+                    date: date,
+                    exercises: exercises,
+                }),
+            });
             const data = await response.json();
             if (response.ok) {
                 setRefresh(!refresh);

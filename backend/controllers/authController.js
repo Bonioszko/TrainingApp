@@ -65,7 +65,7 @@ const loginUser = async (req, res) => {
                 { expiresIn: "1d" },
                 (err, token) => {
                     if (err) throw err;
-                    res.cookie("token", token, { secure: true }).json(user);
+                    res.cookie("token", token).json(user);
                 }
             );
             // return res.status(200).json({ message: "passwords match" });

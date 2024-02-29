@@ -23,22 +23,19 @@ export default function AddTrainingBasedOnTemplate(props) {
         event.preventDefault();
         const { name, date } = data;
         try {
-            const response = await fetch(
-                import.meta.env.VITE_REACT_APP_URL_API + "/trainingInstance",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        name,
-                        date,
-                        doneBy: user.email,
-                        creator: trainingTemplate.creator,
-                        nameTemplate: trainingTemplate.name,
-                    }),
-                }
-            );
+            const response = await fetch("/api/trainingInstance", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name,
+                    date,
+                    doneBy: user.email,
+                    creator: trainingTemplate.creator,
+                    nameTemplate: trainingTemplate.name,
+                }),
+            });
 
             const data = await response.json();
 

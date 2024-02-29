@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/userContext.jsx";
 import { useContext } from "react";
 import Navbar from "../../components/Navbar/Navbar.jsx";
+import "react-toastify/dist/ReactToastify.css";
 import LogoutButton from "../../components/LogoutButton/LogoutButton.jsx";
 export default function Login() {
     const navigate = useNavigate();
@@ -17,21 +18,18 @@ export default function Login() {
         e.preventDefault();
         const { email, password } = data;
         try {
-            const response = await fetch(
-                import.meta.env.VITE_REACT_APP_URL_API + "/auth/login",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    credentials: "include",
-                    body: JSON.stringify({ email, password }),
-                }
-            );
+            const response = await fetch("/api/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify({ email, password }),
+            });
             const responseData = await response.json();
             console.log(responseData);
             if (responseData.error) {
-                toast.error(responseData.error);
+                toast.success(responseData.error);
             } else {
                 toast.success("You are logged as: " + responseData.name);
                 setTimeout(() => {
@@ -86,8 +84,8 @@ export default function Login() {
                         <LogoutButton></LogoutButton>
                     </div>
                 )}
+                <ToastContainer></ToastContainer>
             </div>
-            <ToastContainer></ToastContainer>
         </div>
     );
 }

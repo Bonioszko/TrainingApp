@@ -15,8 +15,7 @@ export default function UserTrainigInstances({
             const date = selectedDate.toISOString();
 
             const response = await fetch(
-                import.meta.env.VITE_REACT_APP_URL_API +
-                    `/trainingInstance/${user.email}/${date}`
+                `/api/trainingInstance/${user.email}/${date}`
             );
             const data = await response.json();
             selectedDate.setHours(selectedDate.getHours() - 1);
