@@ -78,10 +78,24 @@ const getProfile = async (req, res) => {
     const { token } = req.cookies;
 
     if (token) {
-        jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
-            if (err) throw err;
-            res.json(user);
-        });
+        try {
+            jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
+                if (err) throw err;
+                res.json(user);
+            });
+        } catch (err) {
+            if (err instanceof jwt.TokenExpiredError) {
+                // The token has expired
+                res.status(401).json({
+                    error: "Session expired. Please log in again.",
+                });
+            } else {
+                // Some other error occurred
+                res.status(500).json({
+                    error: "An error occurred while verifying the token.",
+                });
+            }
+        }
     } else {
         res.json(null);
     }

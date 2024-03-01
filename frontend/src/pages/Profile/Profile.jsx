@@ -118,9 +118,13 @@ export default function Profile() {
                     ) : (
                         <p>No exercises found</p>
                     )}
-                    <ButtonPlus
+                    <div
+                        className="plus"
                         onClick={() => setExercisePopup(true)}
-                    ></ButtonPlus>
+                    >
+                        Add Exercise
+                    </div>
+
                     <AddExercise
                         trigger={exercisePopup}
                         setTrigger={setExercisePopup}
@@ -145,11 +149,14 @@ export default function Profile() {
                     ) : (
                         <p>No training templates found</p>
                     )}
-                    <ButtonPlus
+                    <div
+                        className="plus"
                         onClick={() => {
                             setTrainingPopup(true);
                         }}
-                    ></ButtonPlus>
+                    >
+                        Add Template
+                    </div>
                 </div>
             </div>
             {trainingPopup && (
