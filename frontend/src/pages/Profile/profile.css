@@ -30,6 +30,20 @@
     flex-direction: row;
     gap: 20px;
 }
+.plus{
+
+height: 100%;
+
+display: flex;
+justify-content: center;
+text-align: center;
+align-items: center;
+font-size: larger;
+gap: 30px;
+background-color: var(--second-color);
+border: solid var(--third-color);
+border-radius: 20px;
+}
 @media  (max-width: 600px) {
     .page-profile{
         display: flex;
