@@ -45,13 +45,13 @@ export default function Navbar() {
         <nav>
             <Link to="/register" className="link register">
                 <FontAwesomeIcon icon={faPen} className="icon" />
-                <span className="text">register</span>
+                <span className="text">Register</span>
                 <span className="small-text">Register</span>
             </Link>
 
             <Link to="/trainings" className="link">
                 <FontAwesomeIcon icon={faDumbbell} className="icon" />
-                <span className="text">trainings</span>
+                <span className="text">Trainings</span>
                 <span className="small-text">Trainings</span>
             </Link>
             {user ? <h1 className="text">Welcome {user.name}</h1> : ""}
@@ -63,7 +63,7 @@ export default function Navbar() {
 
             <Link to="/login" className="link login" id="login">
                 <FontAwesomeIcon icon={faUserPlus} className="icon" />
-                <span className="text">login</span>
+                <span className="text">Login</span>
                 <span className="small-text">Login</span>
             </Link>
 

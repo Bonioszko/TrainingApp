@@ -81,7 +81,7 @@ export default function Login() {
                     <div>
                         {" "}
                         <h1>You are already logged in</h1>
-                        <LogoutButton></LogoutButton>
+                        <LogoutButton text="Logout"></LogoutButton>
                     </div>
                 )}
                 <ToastContainer></ToastContainer>
