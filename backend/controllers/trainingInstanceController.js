@@ -9,7 +9,6 @@ const trainingInstance = require("../models/trainingInstance");
 
 const getTrainingInstance = asyncHandler(async (req, res, next) => {
     const { name, date } = req.body;
-    console.log(date);
 });
 const changeTrainingInstance = asyncHandler(async (req, res, next) => {
     const { name, date, exercises } = req.body;
@@ -19,7 +18,6 @@ const changeTrainingInstance = asyncHandler(async (req, res, next) => {
 
     for (let i = 0; i < exercisesArray.length; i++) {
         const exercise = exercisesArray[i];
-        console.log(exercises[i].sets);
 
         const result = await ExerciseInstance.updateOne(
             { _id: exercise },
@@ -66,7 +64,7 @@ const createTrainingInstance = asyncHandler(async (req, res, next) => {
         name: nameTemplate,
         creator: creator,
     }).populate("exercises");
-    console.log(trainingTemplate);
+
     // if (!date) {
     //     date = new Date();
     // }

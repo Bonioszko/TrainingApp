@@ -19,12 +19,21 @@ nav{
     border-radius: 20px ;
     border: 2px solid white;
 }
+.icon {
+    display: none;
+}
 
+.text {
+    display: inline;
+}
 .link{
     flex: 1;
 }
 .link.login, .link.register{
     flex:0.4
+}
+button.logout {
+    padding: 0px;
 }
 .link:link,
 .link:visited,
@@ -37,14 +46,34 @@ nav{
     background-color: var(--main-color);
     color:white;
 
+
+}
+.small-text {
+    display: none;
+    font-size: 0.5em;
+}
+.link:active,.logout:active{
+    transform: scale(0.8);
+    transition: transform 0.1s ease-in-out;
 }
 /* .logout{
     flex:1;
     line-height: 3;
 } */
 @media  (max-width: 600px) {
-    nav{
-        flex-direction: column;
+
+    .icon {
+        display: inline;
+    }
+
+    .text {
+        display: none;
+    }
+    .link.login, .link.register,.logout{
+        flex:1
+    }
+    .small-text {
+        display: block;
     }
 }
 

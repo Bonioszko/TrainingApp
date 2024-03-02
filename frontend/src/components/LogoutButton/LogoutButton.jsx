@@ -2,7 +2,7 @@ import { UserContext } from "../../../context/userContext.jsx";
 import { useContext } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-export default function LogoutButton() {
+export default function LogoutButton({ text }) {
     const { user, setUser } = useContext(UserContext);
     const handleLogout = async () => {
         // Make a request to your server's logout endpoint
@@ -26,7 +26,7 @@ export default function LogoutButton() {
     return (
         <>
             <button onClick={handleLogout} className="logout">
-                Logout
+                {text}
             </button>
             <ToastContainer />
         </>

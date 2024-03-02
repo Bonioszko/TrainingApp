@@ -7,7 +7,6 @@ const test = (req, res) => {
 };
 //registering user
 const registerUser = asyncHandler(async (req, res, next) => {
-    console.log(req.body);
     const { name, email, password } = req.body;
 
     // Check if all fields are provided
