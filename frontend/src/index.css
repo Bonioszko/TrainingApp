@@ -118,6 +118,10 @@ button, input{
   border-radius: 20px;
 
 }
+button:active, div.plus:active{
+  transform: scale(0.8);
+  transition: transform 0.1s ease-in-out;
+}
 h2{
   text-align: center;
   color: #191A19;
@@ -132,6 +136,7 @@ label{
 input[type="date"]{
   color:  black;
 }
+
 @media  (max-width: 600px) {
   *{font-size: 16px;}
 }

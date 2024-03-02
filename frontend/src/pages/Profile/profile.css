@@ -44,6 +44,9 @@ background-color: var(--second-color);
 border: solid var(--third-color);
 border-radius: 20px;
 }
+.plus:hover{
+    background-color: black;
+}
 @media  (max-width: 600px) {
     .page-profile{
         display: flex;
