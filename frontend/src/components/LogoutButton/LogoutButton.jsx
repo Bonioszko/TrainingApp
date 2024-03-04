@@ -28,7 +28,7 @@ export default function LogoutButton({ text }) {
             <button onClick={handleLogout} className="logout">
                 {text}
             </button>
-            <ToastContainer />
+            {/* <ToastContainer /> */}
         </>
     );
 }

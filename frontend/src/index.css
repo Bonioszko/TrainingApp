@@ -116,7 +116,7 @@ form{
 }
 button, input{
   border-radius: 20px;
-
+  color: black;
 }
 button:active, div.plus:active{
   transform: scale(0.8);

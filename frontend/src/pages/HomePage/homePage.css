@@ -1,0 +1,32 @@
+.home-page{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding-top: 100px;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+
+}
+.post{
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 0.5fr 0.8fr;
+    gap: 20px;
+    border: solid  var(--third-color);
+    background-color: var(--fourth-color);
+    border-radius: 20px;
+    max-width: 1100px;
+    justify-content: space-around;
+}
+.post > img{
+
+    border-radius: 20px;
+}
+
+@media  (max-width: 600px) {
+    .post-text >p, .post-text{
+        font-size: 0.5rem;
+    }
+}
