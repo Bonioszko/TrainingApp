@@ -57,7 +57,9 @@ border: solid var(--third-color);
 border-radius: 20px;
 }
 .top{
-    background-color: aqua;
+    background-color: var(--second-color);
+    padding: 20px;
+    border-radius: 20px;
 
 }
 .plus:hover{

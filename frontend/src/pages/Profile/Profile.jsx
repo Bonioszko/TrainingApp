@@ -7,6 +7,7 @@ import AddExercise from "../../components/AddExercise/AddExercise.jsx";
 import DeleteButton from "../../components/DeleteButton/DeleteButton.jsx";
 import AddTrainingBasedOnTemplate from "../../components/AddTrainingBasedOnTemplate/AddTrainingBasedOnTemplate.jsx";
 import Popup from "../../components/Popup/Popup.jsx";
+import WeightChange from "../../components/WeightChange/WeightChange.jsx";
 import AddTrainingTemplate from "../../components/AddTrainingTemplate.jsx/AddTrainngTemplate.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -114,6 +115,7 @@ export default function Profile() {
             console.error("Failed to delete template");
         }
     };
+
     return (
         <div className="main">
             <Navbar></Navbar>
@@ -122,9 +124,10 @@ export default function Profile() {
                     <div className="top">
                         <h1>welcome {user.name}</h1>
                         <h2> You have done {userTrainingsCount} trainings</h2>
+                        <WeightChange></WeightChange>
+                        <p>your height is {user.height || 0}</p>
                     </div>
                     <div className="bottom">
-                        {" "}
                         <div className="left-profile">
                             <h1>Exercises</h1>
                             {userExercises.length > 0 ? (
