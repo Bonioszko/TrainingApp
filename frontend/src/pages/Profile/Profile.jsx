@@ -15,6 +15,7 @@ import "./profile.css";
 export default function Profile() {
     const { user, setUser } = useContext(UserContext);
     const [userExercises, setUserExercises] = useState([]);
+    const [userTrainingsCount, setUserTrainingsCount] = useState(0);
     const [userTrainingTemplate, setUserTrainingTemplate] = useState([]);
     const [exercisePopup, setExercisePopup] = useState(false);
     const [trainingPopup, setTrainingPopup] = useState(false);
@@ -40,6 +41,24 @@ export default function Profile() {
         }
     }, [user, exercisePopup, refresh]);
     //not optimal one render when poping up a window
+    useEffect(() => {
+        const fetchUserTrainingsCount = async () => {
+            const response = await fetch(
+                `/api/trainingInstance/count/${user.email}`
+            );
+            const data = await response.json();
+            if (response.ok) {
+                setUserTrainingsCount(data.userTrainingsCount);
+            } else {
+                console.log("error");
+            }
+        };
+        if (user) {
+            fetchUserTrainingsCount();
+        } else {
+            setUserTrainingsCount(0);
+        }
+    }, [user]);
     useEffect(() => {
         const fetchTrainingTemplates = async () => {
             const response = await fetch(`/api/training/${user.email}`);
@@ -102,6 +121,7 @@ export default function Profile() {
                 <div className="page-profile">
                     <div className="top">
                         <h1>welcome {user.name}</h1>
+                        <h2> You have done {userTrainingsCount} trainings</h2>
                     </div>
                     <div className="bottom">
                         {" "}
