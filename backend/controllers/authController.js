@@ -59,7 +59,13 @@ const loginUser = async (req, res) => {
             return res.status(400).json({ error: "passwords do not match" });
         } else {
             jwt.sign(
-                { email: user.email, id: user._id, name: user.name },
+                {
+                    email: user.email,
+                    id: user._id,
+                    name: user.name,
+                    height: user.height,
+                    weight: user.weight,
+                },
                 process.env.JWT_SECRET,
                 { expiresIn: "1d" },
                 (err, token) => {
@@ -79,6 +85,7 @@ const getProfile = async (req, res) => {
     if (token) {
         try {
             jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
+                console.log(user);
                 if (err) throw err;
                 res.json(user);
             });
@@ -99,6 +106,44 @@ const getProfile = async (req, res) => {
         res.json(null);
     }
 };
+const updateUser = asyncHandler(async (req, res) => {
+    const { token } = req.cookies;
+    const { height, weight } = req.body;
+
+    if (token) {
+        try {
+            jwt.verify(token, process.env.JWT_SECRET, {}, async (err, user) => {
+                if (err) throw err;
+
+                const updatedUser = await User.findByIdAndUpdate(
+                    user.id,
+                    { height, weight },
+                    { new: true }
+                );
+
+                if (!updatedUser) {
+                    return res.status(404).json({ error: "User not found" });
+                }
+
+                res.json(updatedUser);
+            });
+        } catch (err) {
+            if (err instanceof jwt.TokenExpiredError) {
+                // The token has expired
+                res.status(401).json({
+                    error: "Session expired. Please log in again.",
+                });
+            } else {
+                // Some other error occurred
+                res.status(500).json({
+                    error: "An error occurred while verifying the token.",
+                });
+            }
+        }
+    } else {
+        res.status(401).json({ error: "No token provided" });
+    }
+});
 const logout = async (req, res) => {
     res.clearCookie("token");
     res.json({ logout: true });
@@ -109,4 +154,5 @@ module.exports = {
     loginUser,
     getProfile,
     logout,
+    updateUser,
 };
