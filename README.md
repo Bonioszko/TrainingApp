@@ -13,6 +13,12 @@ This app was created to help all gym lovers track they traininigs and reach thei
 **Database:** MongoDB
 
 
+## Deployment
+
+Link to live-site: https://trainingappfull.onrender.com
+Due to free hosting, opening the site for the first time can take ~40 sec
+
+
 ## Features
 
 - User authentication via JWT tokens
