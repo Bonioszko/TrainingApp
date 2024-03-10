@@ -12,12 +12,11 @@ const getAllExercises = asyncHandler(async (req, res, next) => {
 });
 const deleteExercise = asyncHandler(async (req, res, next) => {
     const { exerciseName, email } = req.body;
-    console.log(req.body);
+
     const user = await User.findOne({ email: email });
     if (!user) {
         return res.status(400).json({ error: "user do not exists" });
     }
-    console.log(user._id);
 
     const exercise = await Exercise.findOneAndDelete({
         name: exerciseName,

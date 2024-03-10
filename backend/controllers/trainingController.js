@@ -5,7 +5,7 @@ const asyncHandler = require("express-async-handler");
 
 const getAllTrainings = asyncHandler(async (req, res, next) => {
     const allTrainings = await TrainingTemplate.find();
-    console.log(req.params);
+
     res.status(200).json({
         title: "allExercises",
         trainingTemplate_list: allTrainings,
@@ -13,10 +13,10 @@ const getAllTrainings = asyncHandler(async (req, res, next) => {
 });
 const addTrainingTemplate = asyncHandler(async (req, res, next) => {
     const { name, email, exercises } = req.body;
-    console.log(email);
+
     let exercisesIds = [];
     const user = await User.findOne({ email: email });
-    console.log(user);
+
     if (exercises && user) {
         for (let i = 0; i < exercises.length; i++) {
             const id = await Exercise.findOne({
@@ -89,12 +89,11 @@ const getAllUserTrainingsTemplates = asyncHandler(async (req, res, next) => {
 });
 const deleteTrainingTemplate = asyncHandler(async (req, res, next) => {
     const { name, email } = req.body;
-    console.log(req.body);
+
     const user = await User.findOne({ email: email });
     if (!user) {
         return res.status(400).json({ error: "user do not exists" });
     }
-    console.log(user._id);
 
     const trainingTemplate = await TrainingTemplate.findOneAndDelete({
         name: name,

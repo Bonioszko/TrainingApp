@@ -7,6 +7,7 @@ import AddExercise from "../../components/AddExercise/AddExercise.jsx";
 import DeleteButton from "../../components/DeleteButton/DeleteButton.jsx";
 import AddTrainingBasedOnTemplate from "../../components/AddTrainingBasedOnTemplate/AddTrainingBasedOnTemplate.jsx";
 import Popup from "../../components/Popup/Popup.jsx";
+import WeightChange from "../../components/WeightChange/WeightChange.jsx";
 import AddTrainingTemplate from "../../components/AddTrainingTemplate.jsx/AddTrainngTemplate.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -15,6 +16,7 @@ import "./profile.css";
 export default function Profile() {
     const { user, setUser } = useContext(UserContext);
     const [userExercises, setUserExercises] = useState([]);
+    const [userTrainingsCount, setUserTrainingsCount] = useState(0);
     const [userTrainingTemplate, setUserTrainingTemplate] = useState([]);
     const [exercisePopup, setExercisePopup] = useState(false);
     const [trainingPopup, setTrainingPopup] = useState(false);
@@ -40,6 +42,24 @@ export default function Profile() {
         }
     }, [user, exercisePopup, refresh]);
     //not optimal one render when poping up a window
+    useEffect(() => {
+        const fetchUserTrainingsCount = async () => {
+            const response = await fetch(
+                `/api/trainingInstance/count/${user.email}`
+            );
+            const data = await response.json();
+            if (response.ok) {
+                setUserTrainingsCount(data.userTrainingsCount);
+            } else {
+                console.log("error");
+            }
+        };
+        if (user) {
+            fetchUserTrainingsCount();
+        } else {
+            setUserTrainingsCount(0);
+        }
+    }, [user]);
     useEffect(() => {
         const fetchTrainingTemplates = async () => {
             const response = await fetch(`/api/training/${user.email}`);
@@ -95,67 +115,83 @@ export default function Profile() {
             console.error("Failed to delete template");
         }
     };
+
     return (
         <div className="main">
             <Navbar></Navbar>
             {user ? (
                 <div className="page-profile">
-                    <div className="left">
-                        <h1>Exercises</h1>
-                        {userExercises.length > 0 ? (
-                            userExercises.map((exercise, index) => (
-                                <div key={index} className="exercise-list">
-                                    <h1>{exercise.name}</h1>
-                                    {exercise.creator ? (
+                    <div className="top">
+                        <h1>welcome {user.name}</h1>
+                        <h2> You have done {userTrainingsCount} trainings</h2>
+                        <WeightChange></WeightChange>
+                        <p>your height is {user.height || 0}</p>
+                    </div>
+                    <div className="bottom">
+                        <div className="left-profile">
+                            <h1>Exercises</h1>
+                            {userExercises.length > 0 ? (
+                                userExercises.map((exercise, index) => (
+                                    <div key={index} className="exercise-list">
+                                        <h1>{exercise.name}</h1>
+                                        {exercise.creator ? (
+                                            <DeleteButton
+                                                onClick={() =>
+                                                    handleDelete(exercise.name)
+                                                }
+                                            ></DeleteButton>
+                                        ) : null}
+                                    </div>
+                                ))
+                            ) : (
+                                <p>No exercises found</p>
+                            )}
+                            <div
+                                className="plus"
+                                onClick={() => setExercisePopup(true)}
+                            >
+                                Add Exercise
+                            </div>
+
+                            <AddExercise
+                                trigger={exercisePopup}
+                                setTrigger={setExercisePopup}
+                            ></AddExercise>
+                        </div>
+                        <div className="right-profile">
+                            <h1>Training templates</h1>
+                            {userTrainingTemplate.length > 0 ? (
+                                userTrainingTemplate.map((training, index) => (
+                                    <div
+                                        key={index}
+                                        className="trainig-template-instance"
+                                    >
+                                        <h1>{training.name}</h1>
                                         <DeleteButton
                                             onClick={() =>
-                                                handleDelete(exercise.name)
+                                                handleDeleteTemplate(
+                                                    training.name
+                                                )
                                             }
                                         ></DeleteButton>
-                                    ) : null}
-                                </div>
-                            ))
-                        ) : (
-                            <p>No exercises found</p>
-                        )}
-                        <div
-                            className="plus"
-                            onClick={() => setExercisePopup(true)}
-                        >
-                            Add Exercise
-                        </div>
-
-                        <AddExercise
-                            trigger={exercisePopup}
-                            setTrigger={setExercisePopup}
-                        ></AddExercise>
-                    </div>
-                    <div className="right">
-                        <h1>Training templates</h1>
-                        {userTrainingTemplate.length > 0 ? (
-                            userTrainingTemplate.map((training, index) => (
-                                <div
-                                    key={index}
-                                    className="trainig-template-instance"
-                                >
-                                    <h1>{training.name}</h1>
-                                    <DeleteButton
-                                        onClick={() =>
-                                            handleDeleteTemplate(training.name)
-                                        }
-                                    ></DeleteButton>
-                                </div>
-                            ))
-                        ) : (
-                            <p>No training templates found</p>
-                        )}
-                        <div
-                            className="plus"
-                            onClick={() => {
-                                setTrainingPopup(true);
-                            }}
-                        >
-                            Add Template
+                                    </div>
+                                ))
+                            ) : (
+                                <p>No training templates found</p>
+                            )}
+                            <div
+                                className="plus"
+                                onClick={() => {
+                                    setTrainingPopup(true);
+                                }}
+                            >
+                                Add Template
+                            </div>
+                            <AddTrainingTemplate
+                                trigger={trainingPopup}
+                                setTrigger={setTrainingPopup}
+                                userExercises={userExercises}
+                            ></AddTrainingTemplate>
                         </div>
                     </div>
                 </div>

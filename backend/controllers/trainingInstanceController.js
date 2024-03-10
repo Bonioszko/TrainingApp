@@ -31,6 +31,25 @@ const changeTrainingInstance = asyncHandler(async (req, res, next) => {
         res.status(400).json({ message: "Update failed" });
     }
 });
+const getTrainingsInstancesForUserCount = asyncHandler(
+    async (req, res, next) => {
+        const { email } = req.params;
+        const user = await User.findOne({ email: email });
+        if (!user) {
+            return res.status(400).json({ error: "User does not exist" });
+        }
+        const countTrainingInstances = await TrainingInstance.aggregate([
+            { $match: { doneBy: user._id } },
+            { $count: "User_trainings" },
+        ]);
+        console.log(countTrainingInstances);
+        const userTrainingsCount =
+            countTrainingInstances.length > 0
+                ? countTrainingInstances[0].User_trainings
+                : 0;
+        return res.status(200).json({ userTrainingsCount });
+    }
+);
 const getTrainingsInstancesForUser = asyncHandler(async (req, res, next) => {
     const { email, date } = req.params;
 
@@ -158,4 +177,5 @@ module.exports = {
     getTrainingInstance,
     changeTrainingInstance,
     getTrainingsInstancesForUser,
+    getTrainingsInstancesForUserCount,
 };
