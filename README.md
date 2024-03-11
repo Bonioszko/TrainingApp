@@ -1,4 +1,4 @@
-
+# Project Still under the development :hammer:
 # TrainingApp
 
 This app was created to help all gym lovers track they traininigs and reach their goals.
