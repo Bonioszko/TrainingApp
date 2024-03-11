@@ -3,14 +3,14 @@ import { useContext } from "react";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePen } from "@fortawesome/free-solid-svg-icons";
-import "./weightChange.css";
-export default function WeightChange() {
+import "./heightChange.css";
+export default function HeightChange() {
     const { user, setUser } = useContext(UserContext);
-    const [isWeightInputDisplayed, setIsWeightInputDisplayed] = useState(false);
-    // Add a new state variable for storing the new weight
-    const [newWeight, setNewWeight] = useState(user.weight || 0);
+    const [isHeightInputDisplayed, setIsHeightInputDisplayed] = useState(false);
+    // Add a new state variable for storing the new height
+    const [newHeight, setNewHeight] = useState(user.height || 0);
 
-    const handleWeightChange = async () => {
+    const handleHeightChange = async () => {
         const response = await fetch(`/api/auth/profile`, {
             method: "PATCH",
             credentials: "include",
@@ -18,7 +18,7 @@ export default function WeightChange() {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                weight: newWeight,
+                height: newHeight,
             }),
         });
         if (response.ok) {
@@ -26,17 +26,17 @@ export default function WeightChange() {
         }
     };
 
-    return isWeightInputDisplayed ? (
+    return isHeightInputDisplayed ? (
         <input
             type="number"
-            value={newWeight}
-            onChange={(e) => setNewWeight(e.target.value)}
-            onBlur={() => setIsWeightInputDisplayed(false)}
+            value={newHeight}
+            onChange={(e) => setNewHeight(e.target.value)}
+            onBlur={() => setIsHeightInputDisplayed(false)}
             onKeyPress={(e) => {
                 if (e.key === "Enter") {
                     e.preventDefault();
-                    handleWeightChange();
-                    setIsWeightInputDisplayed(false);
+                    handleHeightChange();
+                    setIsHeightInputDisplayed(false);
                 }
             }}
             autoFocus
@@ -44,11 +44,11 @@ export default function WeightChange() {
     ) : (
         <div className="edit-property">
             {" "}
-            <p>your weight is {user.weight || 0}</p>{" "}
+            <p>your height is {user.height || 0}</p>{" "}
             <FontAwesomeIcon
                 icon={faSquarePen}
                 className="icon-displayed"
-                onClick={() => setIsWeightInputDisplayed(true)}
+                onClick={() => setIsHeightInputDisplayed(true)}
             />
         </div>
     );

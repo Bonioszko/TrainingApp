@@ -20,10 +20,10 @@ export default function HomePage() {
                     <div className="post-text">
                         <h1>Track your trainngs</h1>
                         <p>
-                            Our application goives you opportunity to increase
+                            Our application gives you opportunity to increase
                             effectivnes of your training. You can track each set
-                            and compare it to previuos weeeks. Make progressive
-                            overaload
+                            and compare it to previuos weeks. Make progressive
+                            overload
                         </p>
                     </div>
                     <img

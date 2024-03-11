@@ -63,8 +63,6 @@ const loginUser = async (req, res) => {
                     email: user.email,
                     id: user._id,
                     name: user.name,
-                    height: user.height,
-                    weight: user.weight,
                 },
                 process.env.JWT_SECRET,
                 { expiresIn: "1d" },
@@ -84,10 +82,11 @@ const getProfile = async (req, res) => {
 
     if (token) {
         try {
-            jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
-                console.log(user);
+            jwt.verify(token, process.env.JWT_SECRET, {}, async (err, user) => {
+                const userReturn = await User.findOne({ _id: user.id });
+
                 if (err) throw err;
-                res.json(user);
+                return res.json(userReturn);
             });
         } catch (err) {
             if (err instanceof jwt.TokenExpiredError) {
@@ -114,18 +113,37 @@ const updateUser = asyncHandler(async (req, res) => {
         try {
             jwt.verify(token, process.env.JWT_SECRET, {}, async (err, user) => {
                 if (err) throw err;
+                if (height) {
+                    const updatedUser = await User.findByIdAndUpdate(
+                        user.id,
+                        { height: height },
+                        { new: true }
+                    );
 
-                const updatedUser = await User.findByIdAndUpdate(
-                    user.id,
-                    { height, weight },
-                    { new: true }
-                );
+                    if (!updatedUser) {
+                        return res
+                            .status(404)
+                            .json({ error: "User not found" });
+                    }
 
-                if (!updatedUser) {
-                    return res.status(404).json({ error: "User not found" });
+                    res.status(200).json(updatedUser);
+                } else if (weight) {
+                    const updatedUser = await User.findByIdAndUpdate(
+                        user.id,
+                        { weight: weight },
+                        { new: true }
+                    );
+                    console.log(updatedUser);
+                    if (!updatedUser) {
+                        return res
+                            .status(404)
+                            .json({ error: "User not found" });
+                    }
+
+                    res.status(200).json(updatedUser);
+                } else {
+                    return res.status(404).json({ error });
                 }
-
-                res.json(updatedUser);
             });
         } catch (err) {
             if (err instanceof jwt.TokenExpiredError) {
