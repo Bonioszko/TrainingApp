@@ -24,7 +24,7 @@ export default function Trainings() {
             <Navbar></Navbar>
             {user ? (
                 <div className="page-trainings">
-                    <div className="left">
+                    <div className="trainings left">
                         <TrainingTemplate
                             refresh={refresh}
                             setRefresh={setRefresh}

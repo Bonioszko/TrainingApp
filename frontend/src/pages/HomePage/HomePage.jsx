@@ -20,10 +20,10 @@ export default function HomePage() {
                     <div className="post-text">
                         <h1>Track your trainngs</h1>
                         <p>
-                            Our application goives you opportunity to increase
+                            Our application gives you opportunity to increase
                             effectivnes of your training. You can track each set
-                            and compare it to previuos weeeks. Make progressive
-                            overaload
+                            and compare it to previuos weeks. Make progressive
+                            overload
                         </p>
                     </div>
                     <img
@@ -33,7 +33,7 @@ export default function HomePage() {
                 </div>
                 <div className="post">
                     <div className="post-text">
-                        <h1>Take your tranings to the next level</h1>
+                        <h1>Take your trianings to the next level</h1>
                         <p>
                             Built in timer allows you to only use one
                             application to track everything in your training
@@ -43,10 +43,17 @@ export default function HomePage() {
                 </div>
                 <div className="post">
                     <div className="post-text">
-                        <h1>Track your trainngs</h1>
-                        <p>Track erach aspect of your training</p>
+                        <h1>Mobile support</h1>
+                        <p>
+                            Use this app without any problems on any device. You
+                            are on a gym and want to track a current workout, no
+                            problem. JUST DO IT
+                        </p>
                     </div>
-                    <img src="https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"></img>
+                    <img
+                        src="https://images.pexels.com/photos/699122/pexels-photo-699122.jpeg"
+                        alt="mobile phone"
+                    ></img>
                 </div>
             </div>
         </div>

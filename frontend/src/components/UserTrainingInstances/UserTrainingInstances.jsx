@@ -10,7 +10,6 @@ export default function UserTrainigInstances({
     const { user, setUser } = useContext(UserContext);
     const [trainingInstances, setTrainingInstances] = useState([]);
     useEffect(() => {
-        console.log(selectedDate);
         const fetchUserTrainingInstances = async () => {
             selectedDate.setHours(selectedDate.getHours() + 1);
             const date = selectedDate.toISOString();
@@ -45,16 +44,6 @@ export default function UserTrainigInstances({
 
                         {training.exercises.map((exercise, indexInner) => (
                             <div key={indexInner}>
-                                {/* <h3>{exercise.name}</h3>
-                                {exercise.sets.map((set, setIndex) => (
-                                    <div key={setIndex}>
-                                        <div>Kilograms: {set.kilograms}</div>
-                                        <div>
-                                            Repetitions: {set.repetitions}
-                                        </div>
-                                    </div>
-
-                                ))} */}
                                 <ExerciseInstanceInList
                                     exercise={exercise}
                                 ></ExerciseInstanceInList>
