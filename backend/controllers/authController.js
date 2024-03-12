@@ -133,7 +133,7 @@ const updateUser = asyncHandler(async (req, res) => {
                         { weight: weight },
                         { new: true }
                     );
-                    console.log(updatedUser);
+
                     if (!updatedUser) {
                         return res
                             .status(404)
