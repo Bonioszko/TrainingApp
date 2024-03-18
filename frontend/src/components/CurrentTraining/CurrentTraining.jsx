@@ -14,6 +14,8 @@ export default function CurrentTraining({
     setRefresh,
 }) {
     const [trainingChanged, setTrainingChanged] = useState(trainingInstance);
+    const [lastTraining, setLastTraining] = useState(trainingInstance);
+    const { user, setUser } = useContext(UserContext);
     const [sets, setSets] = useState(
         trainingInstance.exercises.map(() => ({
             kilograms: "",
@@ -82,20 +84,64 @@ export default function CurrentTraining({
             ),
         });
     };
+    useEffect(() => {
+        const getLastTraining = async () => {
+            try {
+                const response = await fetch(
+                    `/api/trainingInstance/last/${user.email}/${trainingInstance.template}`
+                );
+                const data = await response.json();
+
+                if (response.ok) {
+                    setLastTraining(data.training);
+                }
+            } catch (error) {
+                console.error("Error", error);
+                toast.error("You do not have previous trainings of this type");
+            }
+        };
+        if (user) {
+            getLastTraining();
+        }
+    }, [user, trainingInstance]);
+
     return (
         <div className="popup-training">
             <div className="popup-inner-training">
                 <h1>{trainingChanged.name}</h1>
                 <Stopwatch></Stopwatch>
                 <div className="exercise">
+                    <div className="last-training-div">
+                        <h1 className="last-training">Your Last Training</h1>
+                        {lastTraining &&
+                            lastTraining.exercises.map((exercise, index) => (
+                                <>
+                                    <div
+                                        key={index}
+                                        className="exercise-instance"
+                                    >
+                                        <h2 className="exercise-name">
+                                            Previous Sets for {exercise.name}
+                                        </h2>
+                                        {exercise.sets.map((set, setIndex) => (
+                                            <div key={setIndex}>
+                                                <div className="sets-with-button">
+                                                    <SetsInList
+                                                        set={set}
+                                                    ></SetsInList>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </>
+                            ))}
+                    </div>
                     {trainingChanged.exercises.map((exercise, index) => (
                         <div key={index} className="exercise-instance">
                             <h1 className="exercise-name">{exercise.name}</h1>
                             <h3>previuos Sets</h3>
                             {exercise.sets.map((set, setIndex) => (
                                 <div key={setIndex}>
-                                    {/* <div>Kilograms: {set.kilograms}</div>
-                                    <div>Repetitions: {set.repetitions}</div> */}
                                     <div className="sets-with-button">
                                         {" "}
                                         <SetsInList set={set}></SetsInList>

@@ -123,7 +123,7 @@ export default function Profile() {
             {user ? (
                 <div className="page-profile">
                     <div className="top">
-                        <h1>welcome {user.name}</h1>
+                        <h1>Welcome {user.name}</h1>
                         <h2> You have done {userTrainingsCount} trainings</h2>
                         <WeightChange></WeightChange>
 

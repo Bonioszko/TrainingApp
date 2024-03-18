@@ -7,6 +7,7 @@ const {
     changeTrainingInstance,
     getTrainingsInstancesForUser,
     getTrainingsInstancesForUserCount,
+    getLastTrainingsInstancesForUser,
 } = require("../controllers/trainingInstanceController");
 // router.use(
 //     cors({
@@ -22,5 +23,6 @@ router.post("/", createTrainingInstance);
 router.get("/", getTrainingInstance);
 router.get("/count/:email", getTrainingsInstancesForUserCount);
 router.get("/:email/:date", getTrainingsInstancesForUser);
+router.get("/last/:email/:nameTemplate", getLastTrainingsInstancesForUser);
 router.put("/", changeTrainingInstance);
 module.exports = router;

@@ -33,7 +33,7 @@ export default function HomePage() {
                 </div>
                 <div className="post">
                     <div className="post-text">
-                        <h1>Take your trianings to the next level</h1>
+                        <h1>Take your trainings to the next level</h1>
                         <p>
                             Built in timer allows you to only use one
                             application to track everything in your training
@@ -46,8 +46,8 @@ export default function HomePage() {
                         <h1>Mobile support</h1>
                         <p>
                             Use this app without any problems on any device. You
-                            are on a gym and want to track a current workout, no
-                            problem. JUST DO IT
+                            are in the gym and want to track a current workout,
+                            no problem. JUST DO IT
                         </p>
                     </div>
                     <img
