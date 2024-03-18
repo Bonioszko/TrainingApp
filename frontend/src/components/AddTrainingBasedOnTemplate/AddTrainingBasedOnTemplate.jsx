@@ -15,6 +15,7 @@ export default function AddTrainingBasedOnTemplate(props) {
         name: "",
         doneBy: "",
         exercises: [],
+        template: "",
         date: "",
     });
     const trainingTemplate = props.trainingTemplate;
@@ -45,6 +46,7 @@ export default function AddTrainingBasedOnTemplate(props) {
                     name: data.trainingInstance.name,
                     doneBy: data.trainingInstance.doneBy,
                     exercises: data.trainingInstance.exercises,
+                    template: data.trainingInstance.template,
                     date: data.trainingInstance.date,
                 });
                 setTimeout(() => {

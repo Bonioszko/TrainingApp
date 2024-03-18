@@ -73,6 +73,37 @@ const getTrainingsInstancesForUser = asyncHandler(async (req, res, next) => {
             .json({ message: "User does not have trainings" });
     }
 });
+const getLastTrainingsInstancesForUser = asyncHandler(
+    async (req, res, next) => {
+        const { email, nameTemplate } = req.params;
+
+        const user = await User.findOne({ email: email });
+        if (!user) {
+            return res.status(400).json({ error: "User does not exist" });
+        }
+        // const template = await TrainingTemplate.findOne({
+        //     name: nameTemplate,
+        //     creator: user._id,
+        // });
+        const nearestTrainingInstance = await TrainingInstance.findOne({
+            doneBy: user._id,
+            template: nameTemplate,
+            date: { $lte: new Date() },
+        })
+            .sort({ date: -1 })
+            .populate("exercises");
+
+        if (nearestTrainingInstance) {
+            res.status(200).json({
+                training: nearestTrainingInstance,
+            });
+        } else {
+            return res
+                .status(400)
+                .json({ message: "User does not have trainings" });
+        }
+    }
+);
 const createTrainingInstance = asyncHandler(async (req, res, next) => {
     const { name, doneBy, date, nameTemplate, creator } = req.body;
     const user = await User.findOne({ email: doneBy });
@@ -91,6 +122,7 @@ const createTrainingInstance = asyncHandler(async (req, res, next) => {
         name: name,
         doneBy: user._id,
         exercises: [],
+        template: trainingTemplate._id,
         date: date,
     });
     try {
@@ -122,55 +154,7 @@ const createTrainingInstance = asyncHandler(async (req, res, next) => {
                 .json({ error: "An error occurred while saving the training" });
         }
     }
-    // for (let i = 0; i < trainingTemplate.exercises.length; i++) {
-    //     console.log(trainingTemplate.exercises[i]);
-    //     const exercise = new ExerciseInstance({
-    //         exercise: trainingTemplate.exercises[i],
-    //         sets: [],
-    //     });
-
-    //     Promise.all(savePromises)
-    //         .then((savedExercises) => {
-    //             trainingInstance.exercises.push(savedExercises);
-    //         })
-    //         .catch((error) => {
-    //             console.error("Error saving exercises: ", error);
-    //         });
-    // }
-
-    // let savePromises = trainingTemplate.exercises.map((exerciseTemplate) => {
-    //     const exercise = new ExerciseInstance({
-    //         exercise: exerciseTemplate,
-    //         sets: [],
-    //     });
-
-    //     return exercise.save();
-    // });
-
-    // Promise.all(savePromises)
-    //     .then((savedExercises) => {
-    //         trainingInstance.exercises = savedExercises;
-    //         // Now you can save trainingInstance or do whatever you need with it
-    //     })
-    //     .catch((error) => {
-    //         console.error("Error saving exercises: ", error);
-    //     });
-    // try {
-    //     const result = await trainingInstance.save();
-    //     return res.status(200).json({ trainingInstance: result });
-    // } catch (err) {
-    //     if (err.code == 11000) {
-    //         return res.status(400).json({
-    //             error: "You already have training of the same name done today",
-    //         });
-    //     } else {
-    //         return res
-    //             .status(500)
-    //             .json({ error: "An error occurred while saving the training" });
-    //     }
-    // }
 });
-///make an api call to get the exercises, populate them from training
 
 module.exports = {
     createTrainingInstance,
@@ -178,4 +162,5 @@ module.exports = {
     changeTrainingInstance,
     getTrainingsInstancesForUser,
     getTrainingsInstancesForUserCount,
+    getLastTrainingsInstancesForUser,
 };
