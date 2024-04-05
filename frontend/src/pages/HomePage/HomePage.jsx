@@ -22,7 +22,7 @@ export default function HomePage() {
                         <p>
                             Our application gives you opportunity to increase
                             effectivnes of your training. You can track each set
-                            and compare it to previuos weeks. Make progressive
+                            and compare it to a previuos weeks. Make progressive
                             overload
                         </p>
                     </div>

@@ -139,7 +139,7 @@ export default function CurrentTraining({
                     {trainingChanged.exercises.map((exercise, index) => (
                         <div key={index} className="exercise-instance">
                             <h1 className="exercise-name">{exercise.name}</h1>
-                            <h3>previuos Sets</h3>
+                            <h3>Previuos Sets</h3>
                             {exercise.sets.map((set, setIndex) => (
                                 <div key={setIndex}>
                                     <div className="sets-with-button">

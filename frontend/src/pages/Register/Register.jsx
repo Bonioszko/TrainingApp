@@ -44,7 +44,7 @@ export default function Register() {
                 <form onSubmit={handleSubmit}>
                     <h2>Register</h2>
                     <div className="form-field">
-                        <label htmlFor="">Name</label>
+                        <label htmlFor="">name</label>
                         <input
                             type="text"
                             placeholder="enter name"

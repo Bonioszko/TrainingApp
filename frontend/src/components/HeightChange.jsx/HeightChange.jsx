@@ -44,7 +44,7 @@ export default function HeightChange() {
     ) : (
         <div className="edit-property">
             {" "}
-            <p>your height is {user.height || 0}</p>{" "}
+            <p>Your height is {user.height || 0}</p>{" "}
             <FontAwesomeIcon
                 icon={faSquarePen}
                 className="icon-displayed"

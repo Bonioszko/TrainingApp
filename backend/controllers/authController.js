@@ -20,27 +20,21 @@ const registerUser = asyncHandler(async (req, res, next) => {
     }
 
     try {
-        // Check if user already exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ error: "User already exists" });
         }
 
-        // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Create a new user
         const user = new User({
             name,
             email,
             password: hashedPassword,
         });
 
-        // Save the user
         const result = await user.save();
 
-        // Redirect to home page
-        // res.redirect("/");
         return res.status(200).json({ message: "user created succesfuly" });
     } catch (err) {
         return next(err);
@@ -90,12 +84,10 @@ const getProfile = async (req, res) => {
             });
         } catch (err) {
             if (err instanceof jwt.TokenExpiredError) {
-                // The token has expired
                 res.status(401).json({
                     error: "Session expired. Please log in again.",
                 });
             } else {
-                // Some other error occurred
                 res.status(500).json({
                     error: "An error occurred while verifying the token.",
                 });

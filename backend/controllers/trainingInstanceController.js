@@ -81,10 +81,6 @@ const getLastTrainingsInstancesForUser = asyncHandler(
         if (!user) {
             return res.status(400).json({ error: "User does not exist" });
         }
-        // const template = await TrainingTemplate.findOne({
-        //     name: nameTemplate,
-        //     creator: user._id,
-        // });
         const nearestTrainingInstance = await TrainingInstance.findOne({
             doneBy: user._id,
             template: nameTemplate,
